@@ -7,12 +7,10 @@ const { CHANNEL_URL, CHANNEL_HTML } = require('../common/constants/redis');
 
     const messageQueue = new MessageQueue();
 
-    messageQueue.subscribe( CHANNEL_URL, async ( data ) => {
+    await messageQueue.subscribe( CHANNEL_URL, async ( data ) => {
         const { message: url } = data;
         const html = await browser.getPageHtml( url );
-        messageQueue.publish( CHANNEL_HTML, {
-            html,
-        });
+        console.log(html);
     })
 
 })()

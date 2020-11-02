@@ -20,7 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d04128bd-ef64-4b72-830b-1790dcb187c5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/extract-url/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/dev/push-twitter.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/dev/push-startpagina.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/utility/MessageQueue.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/utility/MessageQueue.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/explore-site/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/explore-site/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +53,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="14.9.0" />
     <property name="javascript.nodejs.core.library.typings.version" value="14.14.6" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/common/models" />
     <property name="nodejs_interpreter_path" value="$USER_HOME$/.nvm/versions/node/v14.9.0/bin/node" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="settings.nodejs" />
@@ -58,11 +61,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/common/models" />
+      <recent name="$PROJECT_DIR$/src/common/models/Abstract" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/extract-url" />
       <recent name="$PROJECT_DIR$/src/web" />
-      <recent name="$PROJECT_DIR$/src/extract-meta" />
-      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunManager" selected="npm.dev:redis">
@@ -123,8 +126,16 @@
       <updated>1604268418629</updated>
       <workItem from="1604268419663" duration="585000" />
       <workItem from="1604269570595" duration="1271000" />
-      <workItem from="1604271148285" duration="4763000" />
+      <workItem from="1604271148285" duration="9904000" />
     </task>
+    <task id="LOCAL-00001" summary="init">
+      <created>1604275930732</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1604275930732</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -141,6 +152,10 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="init" />
+    <option name="LAST_COMMIT_MESSAGE" value="init" />
   </component>
   <component name="WindowStateProjectService">
     <state x="743" y="300" width="424" height="519" key="FileChooserDialogImpl" timestamp="1604270219601">
@@ -167,6 +182,14 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="464" y="188" width="992" height="737" key="SettingsEditor/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604270269626" />
+    <state x="2711" y="0" width="694" height="588" maximized="true" key="dock-window-1" timestamp="1604279147998">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2711" y="0" width="694" height="588" maximized="true" key="dock-window-1/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604279147998" />
+    <state x="3511" y="397" width="694" height="588" key="dock-window-2" timestamp="1604278682811">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="3511" y="397" width="694" height="588" key="dock-window-2/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604278682811" />
     <state x="623" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1604273947989">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>

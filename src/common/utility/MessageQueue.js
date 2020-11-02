@@ -3,7 +3,9 @@ const RSMQWorker = require('rsmq-worker');
 
 module.exports = class MessageQueue {
 
-    subscribe ( queueName, promiseCallback ) {
+    async subscribe ( queueName, promiseCallback ) {
+        await this.ensureQueue( queueName );
+
         const worker = new RSMQWorker( queueName, {
             autostart: true
         });
