@@ -10,3 +10,9 @@ services:
     container_name: "mongo.search.tmp.dev"
     ports:
       - "27017:27017"
+  elasticsearch:
+    image: "elasticsearch:7.9.3"
+    container_name: "elasticsearch.search.tmp.dev"
+    ports:
+      - "9200:9200"
+      - "9300:9300"

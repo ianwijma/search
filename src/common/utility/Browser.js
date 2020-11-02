@@ -1,23 +1,18 @@
-const { launch } = require('puppeteer');
+const puppeteer = require('puppeteer');
 
-module.export = class Browser {
+module.exports = class Browser {
 
-    async _getBrowser( options = {} ) {
-        return await launch({
-            ...options
-        });
-    }
-
-    async _ensureBrowser() {
-        if ( !this.b ) {
-            this.b = await this._getBrowser();
-        }
+    async getBrowser() {
+            return await puppeteer.launch();
     }
 
     async getPageHtml( url ) {
-        await this._ensureBrowser();
-
-        
+        const browser = await this.getBrowser();
+        const page = await browser.newPage();
+        await page.goto(url, {waitUntil: 'networkidle2'});
+        return await page.evaluate(() => {
+            return document.documentElement.outerHTML;
+        });
     }
 
 }

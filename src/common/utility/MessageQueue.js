@@ -1,16 +1,19 @@
-const RSMQPromise = require('rsmq-promise');
 const RSMQWorker = require('rsmq-worker');
 
 module.exports = class MessageQueue {
 
     async subscribe ( queueName, promiseCallback ) {
-        await this.ensureQueue( queueName );
+        const worker = this.getPublisher( queueName );
 
-        const worker = new RSMQWorker( queueName, {
-            autostart: true
+        worker.on('error', function( err, msg ){
+            console.log( "ERROR", err, msg.id );
+        });
+        worker.on('timeout', function( msg ){
+            console.log( "TIMEOUT", msg.id, msg.rc );
         });
 
         worker.on('message', async ( message, next, id ) => {
+            console.log(message);
             const data = this.decodeMessage( message, id );
             promiseCallback( data )
                 .then(() => next())
@@ -42,22 +45,16 @@ module.exports = class MessageQueue {
             JSON.stringify( message );
     }
 
-    getPublisher () {
-        return new RSMQPromise();
-    }
-
-    async ensureQueue ( queueName ) {
-        const pub = this.getPublisher();
-        const queues = await pub.listQueues();
-        if ( !queues.contains( queueName ) ) {
-            await pub.createQueue( queueName );
-        }
+    getPublisher ( queueName ) {
+        return new RSMQWorker( queueName, {
+            autostart: true,
+            timeout: 0,
+        });
     }
 
     async publish ( queueName, message ) {
-        await this.ensureQueue( queueName );
-        const pub = this.getPublisher();
-        await pub.sendMessage( queueName, this.encodeMessage( message ) );
+        const pub = this.getPublisher( queueName );
+        await pub.send( this.encodeMessage( message ) );
     }
 
 }
