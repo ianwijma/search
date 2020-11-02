@@ -12,11 +12,12 @@ class DownloadHtml extends AbstractRunner {
     async run () {
         const { worker, htmlWorker } = this;
         this.receiveWorkerMessage( worker, async ({ html, url: htmlUrlString }) => {
+            console.log(`[${QUEUE_EXTRACT_URLS}]`, htmlUrlString);
             const htmlUrl = new URL( htmlUrlString );
             const dom = new JSDOM( html );
             const aTags = dom.window.document.querySelectorAll('a[href]');
             aTags.forEach(({ href: hrefString }) => {
-                if ( !hrefString || hrefString !== '#' ) {
+                if ( !!hrefString || hrefString !== '#' || hrefString !== '' ) {
                     if (hrefString.startsWith('/')) {
                         hrefString = `${htmlUrl.protocol}//${htmlUrl.hostname}${hrefString}`;
                     }

@@ -1,10 +1,15 @@
-const MessageQueue = require('../../src/common/utility/MessageQueue');
-const { CHANNEL_SITE } = require('../../src/common/constants/redis');
+const AbstractRunner = require('../../src/common/AbstractRunner.js');
+const RSMQWorker = require('rsmq-worker');
+const { QUEUE_DOWNLOAD_HTML } = require('../../src/common/constants/redis');
 
 (async function (){
-    const messageQueue = new MessageQueue();
+    const worker = new RSMQWorker( QUEUE_DOWNLOAD_HTML, {
+        autostart: true,
+    });
 
-    await messageQueue.publish( CHANNEL_SITE, {url: 'https://www.startpagina.nl/'});
+    (new AbstractRunner()).sendWorkerMessage(worker, {
+        url: 'https://www.startpagina.nl/'
+    });
 
     console.log('Done!');
 })()

@@ -12,8 +12,10 @@ class DownloadHtml extends AbstractRunner {
     async run () {
         const { worker, metaImportWorker } = this;
         this.receiveWorkerMessage( worker, async ({ html, url }) => {
+            console.log(`[${QUEUE_EXTRACT_META}]`, url);
             const dom = new JSDOM( html );
-            const { head, body } = dom.window;
+            const head = dom.window.document.querySelector('head')
+            const body = dom.window.document.querySelector('body')
             this.sendWorkerMessage( metaImportWorker, {
                 url,
                 title: head.querySelectorAll('title').innerText,

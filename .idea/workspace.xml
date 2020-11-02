@@ -20,7 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d04128bd-ef64-4b72-830b-1790dcb187c5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/download-html/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/dev/push-startpagina.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/dev/push-startpagina.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/AbstractRunner.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/AbstractRunner.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/download-html/index-old.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/download-html/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/download-html/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/extract-meta/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/extract-meta/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/extract-urls/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/extract-urls/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/import-meta/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/import-meta/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +77,7 @@
       <recent name="$PROJECT_DIR$/src/common/models" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yml.kibana: Compose Deployment">
+  <component name="RunManager" selected="npm.dev:run">
     <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
@@ -103,11 +112,11 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="dev:redis" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+    <configuration name="dev:run" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
-        <script value="dev:redis" />
+        <script value="dev:run" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -125,11 +134,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.dev:run" />
         <item itemvalue="Docker.docker-compose.yml.kibana: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.elasticsearch: Compose Deployment" />
         <item itemvalue="npm.dev:run:explore" />
         <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
-        <item itemvalue="npm.dev:redis" />
       </list>
     </recent_temporary>
   </component>
@@ -143,7 +152,7 @@
       <updated>1604268418629</updated>
       <workItem from="1604268419663" duration="585000" />
       <workItem from="1604269570595" duration="1271000" />
-      <workItem from="1604271148285" duration="22087000" />
+      <workItem from="1604271148285" duration="24917000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1604275930732</created>
@@ -173,7 +182,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604297254074</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added docker-compose.yml">
+      <created>1604297375945</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1604297375945</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -203,30 +219,30 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="743" y="300" width="424" height="519" key="FileChooserDialogImpl/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604270219601" />
-    <state width="1878" height="389" key="GridCell.Tab.0.bottom" timestamp="1604289921791">
+    <state width="1878" height="302" key="GridCell.Tab.0.bottom" timestamp="1604300054962">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="389" key="GridCell.Tab.0.bottom/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604289921791" />
-    <state width="1878" height="389" key="GridCell.Tab.0.center" timestamp="1604289921791">
+    <state width="1878" height="302" key="GridCell.Tab.0.bottom/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604300054962" />
+    <state width="1878" height="302" key="GridCell.Tab.0.center" timestamp="1604300054961">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="389" key="GridCell.Tab.0.center/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604289921791" />
-    <state width="1878" height="389" key="GridCell.Tab.0.left" timestamp="1604289921791">
+    <state width="1878" height="302" key="GridCell.Tab.0.center/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604300054961" />
+    <state width="1878" height="302" key="GridCell.Tab.0.left" timestamp="1604300054961">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="389" key="GridCell.Tab.0.left/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604289921790" />
-    <state width="1878" height="389" key="GridCell.Tab.0.right" timestamp="1604289921791">
+    <state width="1878" height="302" key="GridCell.Tab.0.left/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604300054961" />
+    <state width="1878" height="302" key="GridCell.Tab.0.right" timestamp="1604300054962">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="389" key="GridCell.Tab.0.right/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604289921791" />
+    <state width="1878" height="302" key="GridCell.Tab.0.right/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604300054962" />
     <state x="464" y="188" width="992" height="737" key="SettingsEditor" timestamp="1604270269626">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="464" y="188" width="992" height="737" key="SettingsEditor/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604270269626" />
-    <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2" timestamp="1604288612506">
+    <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2" timestamp="1604297378137">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604288612506" />
+    <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604297378137" />
     <state x="566" y="167" width="778" height="780" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1604294727351">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>

@@ -15,12 +15,15 @@ class DownloadHtml extends AbstractRunner {
         const { browser, worker, metaExtractWorker, extractUrlsWorker } = this;
         this.receiveWorkerMessage( worker, async ({ url }) => {
             if (!url) return;
+            console.log(`[${QUEUE_DOWNLOAD_HTML}]`, url);
 
             const page = await browser.newPage();
             await page.goto(url, {waitUntil: 'networkidle2'});
             const html = await page.evaluate(() => {
                 return document.documentElement.outerHTML;
             });
+
+            console.log(`[${QUEUE_DOWNLOAD_HTML}]`, 'HTML length:', html.length);
 
             this.sendWorkerMessage( metaExtractWorker, {
                 html, url

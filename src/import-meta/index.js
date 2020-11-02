@@ -13,10 +13,13 @@ class DownloadHtml extends AbstractRunner {
     async run () {
         const { worker } = this;
         this.receiveWorkerMessage( worker, async ({ url: urlString, ...data }) => {
+            console.log(`[${QUEUE_IMPORT_META}]`, urlString);
             const url = new URL( urlString );
             const body = {
-                url: `${url.hostname}${url.pathname}`,
-                ...data,
+                url: {
+                    ...url
+                },
+                ...data
             };
             await this.client.index({
                 index: INDEX_META,

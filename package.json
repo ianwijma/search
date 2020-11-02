@@ -5,8 +5,11 @@
   "main": "index.js",
   "scripts": {
     "dev": "npm-run-all dev:*",
-    "dev:run": "npm-run-all dev:run:*",
-    "dev:run:explore": "nodemon src/download-html/index.js"
+    "dev:run": "npm-run-all --parallel  dev:run:*",
+    "dev:run:download-html": "nodemon src/download-html/index.js",
+    "dev:run:extract-meta": "nodemon src/extract-meta/index.js",
+    "dev:run:extract-urls": "nodemon src/extract-urls/index.js",
+    "dev:run:import-meta": "nodemon src/import-meta/index.js"
   },
   "repository": {
     "type": "git",

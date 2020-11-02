@@ -37,9 +37,11 @@ module.exports = class AbstractRunner {
 
     sendWorkerMessage ( worker, message ) {
         worker.send( this.encodeWorkerMessage( message ) );
+        console.log(`[${worker.queuename}]`, 'Sending data to worker');
     }
 
     receiveWorkerMessage ( worker, promiseCallback ) {
+        console.log(`[${worker.queuename}]`, 'Listening for data');
         worker.on('message', (message, next, id) => {
             const data = this.decodeWorkerMessage(message, id);
             promiseCallback( data )
