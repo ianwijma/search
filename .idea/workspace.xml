@@ -20,18 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d04128bd-ef64-4b72-830b-1790dcb187c5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/elasticsearch.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/dev/push-startpagina.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/dev/push-startpagina.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/constants/redis.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/constants/redis.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/utility/Browser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/utility/Browser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/download-page/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/explore-site/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/download-html/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extract-meta/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/extract-meta/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extract-url/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/extract-urls/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/download-html/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,7 +143,7 @@
       <updated>1604268418629</updated>
       <workItem from="1604268419663" duration="585000" />
       <workItem from="1604269570595" duration="1271000" />
-      <workItem from="1604271148285" duration="21673000" />
+      <workItem from="1604271148285" duration="22087000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1604275930732</created>
@@ -177,7 +166,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604288611498</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added docker-compose.yml">
+      <created>1604297254074</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1604297254074</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -199,7 +195,8 @@
     <MESSAGE value="init" />
     <MESSAGE value="Worked on the database" />
     <MESSAGE value="Worked on the flow" />
-    <option name="LAST_COMMIT_MESSAGE" value="Worked on the flow" />
+    <MESSAGE value="Added docker-compose.yml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added docker-compose.yml" />
   </component>
   <component name="WindowStateProjectService">
     <state x="743" y="300" width="424" height="519" key="FileChooserDialogImpl" timestamp="1604270219601">
