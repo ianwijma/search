@@ -1,0 +1,7 @@
+node:
+  data : true
+network:
+  host : 0.0.0.0
+discovery:
+  seed_hosts : []
+  type: single-node

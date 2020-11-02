@@ -5,6 +5,13 @@ services:
     container_name: "redis.search.tmp.dev"
     ports:
       - "6379:6379"
+  redisinsight:
+    image: "redislabs/redisinsight:latest"
+    container_name: "redisinsight.search.tmp.dev"
+    ports:
+      - "8001:8001"
+    depends_on:
+      - redis
   mongo:
     image: "mongo"
     container_name: "mongo.search.tmp.dev"
@@ -13,6 +20,20 @@ services:
   elasticsearch:
     image: "elasticsearch:7.9.3"
     container_name: "elasticsearch.search.tmp.dev"
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
     ports:
       - "9200:9200"
-      - "9300:9300"
+    volumes:
+      - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+  kibana:
+    image: "kibana:7.9.3"
+    container_name: "kibana.search.tmp.dev"
+    ports:
+      - "5601:5601"

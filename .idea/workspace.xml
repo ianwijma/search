@@ -20,14 +20,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d04128bd-ef64-4b72-830b-1790dcb187c5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/elasticsearch.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/dev/push-startpagina.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/dev/push-startpagina.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/constants/redis.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/constants/redis.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/common/utility/Browser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/utility/Browser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/utility/MessageQueue.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/utility/MessageQueue.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/explore-site/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/explore-site/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/download-page/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/explore-site/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/download-html/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/extract-meta/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/extract-meta/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/extract-url/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/extract-urls/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,22 +61,25 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="14.9.0" />
     <property name="javascript.nodejs.core.library.typings.version" value="14.14.6" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/common/models" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/common/constants" />
     <property name="nodejs_interpreter_path" value="$USER_HOME$/.nvm/versions/node/v14.9.0/bin/node" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="settings.nodejs" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/elasticsearch-config" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/common/models" />
-      <recent name="$PROJECT_DIR$/src/common/models/Abstract" />
+      <recent name="$PROJECT_DIR$/src/common/constants" />
+      <recent name="$PROJECT_DIR$/src/import-meta" />
+      <recent name="$PROJECT_DIR$/src/download-html" />
       <recent name="$PROJECT_DIR$/src" />
-      <recent name="$PROJECT_DIR$/src/extract-url" />
-      <recent name="$PROJECT_DIR$/src/web" />
+      <recent name="$PROJECT_DIR$/src/common/models" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yml.elasticsearch: Compose Deployment">
+  <component name="RunManager" selected="Docker.docker-compose.yml.kibana: Compose Deployment">
     <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
@@ -94,14 +101,17 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="dev:redis-command" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="dev:redis-command" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
+    <configuration name="docker-compose.yml.kibana: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="kibana" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
       <method v="2" />
     </configuration>
     <configuration name="dev:redis" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -126,11 +136,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.docker-compose.yml.kibana: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.elasticsearch: Compose Deployment" />
         <item itemvalue="npm.dev:run:explore" />
         <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
         <item itemvalue="npm.dev:redis" />
-        <item itemvalue="npm.dev:redis-command" />
       </list>
     </recent_temporary>
   </component>
@@ -144,7 +154,7 @@
       <updated>1604268418629</updated>
       <workItem from="1604268419663" duration="585000" />
       <workItem from="1604269570595" duration="1271000" />
-      <workItem from="1604271148285" duration="14850000" />
+      <workItem from="1604271148285" duration="21673000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1604275930732</created>
@@ -160,7 +170,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604281083045</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Worked on the flow">
+      <created>1604288611498</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1604288611498</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,37 +198,42 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
     <MESSAGE value="Worked on the database" />
-    <option name="LAST_COMMIT_MESSAGE" value="Worked on the database" />
+    <MESSAGE value="Worked on the flow" />
+    <option name="LAST_COMMIT_MESSAGE" value="Worked on the flow" />
   </component>
   <component name="WindowStateProjectService">
     <state x="743" y="300" width="424" height="519" key="FileChooserDialogImpl" timestamp="1604270219601">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="743" y="300" width="424" height="519" key="FileChooserDialogImpl/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604270219601" />
-    <state width="1878" height="389" key="GridCell.Tab.0.bottom" timestamp="1604284769517">
+    <state width="1878" height="389" key="GridCell.Tab.0.bottom" timestamp="1604289921791">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="389" key="GridCell.Tab.0.bottom/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604284769517" />
-    <state width="1878" height="389" key="GridCell.Tab.0.center" timestamp="1604284769516">
+    <state width="1878" height="389" key="GridCell.Tab.0.bottom/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604289921791" />
+    <state width="1878" height="389" key="GridCell.Tab.0.center" timestamp="1604289921791">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="389" key="GridCell.Tab.0.center/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604284769516" />
-    <state width="1878" height="389" key="GridCell.Tab.0.left" timestamp="1604284769516">
+    <state width="1878" height="389" key="GridCell.Tab.0.center/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604289921791" />
+    <state width="1878" height="389" key="GridCell.Tab.0.left" timestamp="1604289921791">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="389" key="GridCell.Tab.0.left/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604284769516" />
-    <state width="1878" height="389" key="GridCell.Tab.0.right" timestamp="1604284769517">
+    <state width="1878" height="389" key="GridCell.Tab.0.left/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604289921790" />
+    <state width="1878" height="389" key="GridCell.Tab.0.right" timestamp="1604289921791">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="389" key="GridCell.Tab.0.right/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604284769516" />
+    <state width="1878" height="389" key="GridCell.Tab.0.right/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604289921791" />
     <state x="464" y="188" width="992" height="737" key="SettingsEditor" timestamp="1604270269626">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="464" y="188" width="992" height="737" key="SettingsEditor/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604270269626" />
-    <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2" timestamp="1604281084574">
+    <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2" timestamp="1604288612506">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604281084574" />
+    <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604288612506" />
+    <state x="566" y="167" width="778" height="780" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1604294727351">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="566" y="167" width="778" height="780" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604294727351" />
     <state x="2711" y="0" width="694" height="588" maximized="true" key="dock-window-1" timestamp="1604279147998">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>

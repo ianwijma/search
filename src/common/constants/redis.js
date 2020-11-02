@@ -1,6 +1,6 @@
 module.exports = {
-    CHANNEL_HTML: 'channel-html',
-    CHANNEL_META: 'channel-meta',
-    CHANNEL_URL: 'channel-url',
-    CHANNEL_SITE: 'channel-site',
+    QUEUE_DOWNLOAD_HTML: 'queue-download-html',
+    QUEUE_EXTRACT_META: 'queue-extract-meta',
+    QUEUE_IMPORT_META: 'queue-import-meta',
+    QUEUE_EXTRACT_URLS: 'queue-extract-urls',
 }

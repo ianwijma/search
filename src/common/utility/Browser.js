@@ -10,9 +10,11 @@ module.exports = class Browser {
         const browser = await this.getBrowser();
         const page = await browser.newPage();
         await page.goto(url, {waitUntil: 'networkidle2'});
-        return await page.evaluate(() => {
+        const html = await page.evaluate(() => {
             return document.documentElement.outerHTML;
         });
+        await page.close();
+        return html;
     }
 
 }
