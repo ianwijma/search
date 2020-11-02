@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  redis:
+    image: "redis"
+    container_name: "redis.search.tmp.dev"
+    ports:
+      - "6379:6379"
+  mongo:
+    image: "mongo"
+    container_name: "mongo.search.tmp.dev"
+    ports:
+      - "27017:27017"
