@@ -21,10 +21,11 @@ class UrlPubSubProcessor extends Runner {
         redisTools.subscribeData(
             client,
             PUBSUB_HTML,
-            async ({
-               html,
-               hostname
-            }) => {
+            async ({ data }) => {
+                const {
+                    html,
+                    hostname
+                } = data;
                 const dom = new Dom( html );
                 const body = dom.getBody();
                 const links = dom.queryLinks( body );

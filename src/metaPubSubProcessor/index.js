@@ -20,12 +20,13 @@ class MetaPubSubProcessor extends Runner {
         redisTools.subscribeData(
             client,
             PUBSUB_HTML,
-            async ({
-               html,
-               hostname,
-               pathname = '',
-               search = ''
-            }) => {
+            async ({ data }) => {
+                const {
+                    html,
+                    hostname,
+                    pathname = '',
+                    search = ''
+                } = data;
                 const meta = await this.getExtractedMeta( html );
                 workerTools.sendData( metaWorker, {
                     meta, hostname, pathname, search
@@ -34,7 +35,7 @@ class MetaPubSubProcessor extends Runner {
         )
     }
 
-    async getExtractedMeta (html ) {
+    async getExtractedMeta ( html ) {
         const dom = new Dom( html );
 
         const meta = {};
@@ -59,8 +60,6 @@ class MetaPubSubProcessor extends Runner {
         meta['links'] = dom.queryLinks( body );
         meta['images'] = dom.queryImages( body );
 
-        console.log(body.innerText);
-        console.log(meta);
         const text = new Text( body.innerText );
         const [
             keyword, keyPhrases, summary
