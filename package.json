@@ -8,7 +8,7 @@
     "dev:run": "npm-run-all --parallel dev:run:*",
     "dev:run:elasticSearchProcessor": "nodemon src/elasticSearchProcessor/index.js",
     "dev:run:metaQueueProcessor": "nodemon src/metaQueueProcessor/index.js",
-    "dev:run:metaPubSubProcessor": "nodemon src/metaPubSubProcessor/index.js",
+    "dev:run:metaPubSubProcessor": "",
     "dev:run:urlPubSubProcessor": "nodemon src/urlPubSubProcessor/index.js",
     "dev:run:pageQueueProcessor": "nodemon src/pageQueueProcessor/index.js",
     "dev:run:hostnameQueueProcessor": "nodemon src/hostnameQueueProcessor/index.js"

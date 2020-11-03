@@ -26,14 +26,17 @@ module.exports = class Dom {
         return this.getDocument().querySelector('body');
     }
 
-    elementGetInnerText( element ) {
-        if ( 'innerText' in element )
-            return element.innerText;
+    elementGetText(element ) {
+        if ( 'textContent' in element )
+            return element.textContent.trim();
     }
 
     elementGetAttribute( element, attributeName ) {
-        if ( 'getAttribute' in element )
-            return element.getAttribute( attributeName );
+        if ( 'getAttribute' in element ) {
+            let value = element.getAttribute( attributeName );
+            if ( typeof value === 'string' ) value = value.trim();
+            return value;
+        }
     }
 
     elementQuery ( element, query ) {
@@ -46,19 +49,19 @@ module.exports = class Dom {
             return element.querySelectorAll( query );
     }
 
-    queryInnerText ( parentElement, query ) {
+    queryText (parentElement, query ) {
         const element = this.elementQuery( parentElement, query );
         if ( element )
-            return this.elementGetInnerText( element );
+            return this.elementGetText( element );
     }
 
-    queryAllInnerText ( parentElement, query ) {
+    queryAllText (parentElement, query ) {
         const array = [];
 
         const elements = this.elementQueryAll( parentElement, query );
         if ( elements && elements.length > 0 ) {
             elements.forEach( element => {
-                const data = this.elementGetInnerText( element );
+                const data = this.elementGetText( element );
                 if ( !!data ) array.push( data );
             });
         }
@@ -90,10 +93,10 @@ module.exports = class Dom {
         const links = [];
 
         const aTags = this.elementQueryAll( parentElement, 'a' );
-        aTags && aTags.forEach(({ href, innerText }) => {
+        aTags && aTags.forEach(({ href, textContent }) => {
             links.push({
                 link: href,
-                label: innerText
+                label: textContent
             })
         });
 

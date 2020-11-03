@@ -58,9 +58,11 @@ module.exports = class Text {
     getKeyWords ( maximum = 25 ) {
         return new Promise(resolve => {
             const done = (err, file) => {
+                const data = [];
                 file.data.keywords.forEach(function(keyword) {
-                    resolve( toString(keyword.matches[0].node) );
-                })
+                    data.push( toString(keyword.matches[0].node) );
+                });
+                resolve( data );
             }
 
             retext()
@@ -74,12 +76,13 @@ module.exports = class Text {
     getKeyPhrases ( maximum = 25 ) {
         return new Promise(resolve => {
             const done = (err, file) => {
+                const data = [];
                 file.data.keyphrases.forEach(function(phrase) {
-                    resolve( phrase.matches[0].nodes.map(stringify).join('') )
-                    function stringify(value) {
-                        return toString(value)
-                    }
-                })
+                    data.push(
+                        phrase.matches[0].nodes.map(toString).join('')
+                    )
+                });
+                resolve( data )
             }
 
             retext()
