@@ -22,7 +22,7 @@ class HostnameQueueProcessor extends Runner {
             const updateKey = workerTools.createKey( PREFIX_PAGE_UPDATED, hostname );
             const counterKey = workerTools.createKey( PREFIX_PAGE_COUNTER, hostname );
             if ( this.shouldProcess( updateKey ) ) {
-                await workerTools.sendData( pageWorker, hostname );
+                await workerTools.sendData( pageWorker, { hostname } );
                 redis.set( updateKey, Date.now() );
                 redis.incr( counterKey );
             }
@@ -37,3 +37,5 @@ class HostnameQueueProcessor extends Runner {
     }
 
 }
+
+(new HostnameQueueProcessor()).start();

@@ -20,24 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d04128bd-ef64-4b72-830b-1790dcb187c5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/search.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/search.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/AbstractRunner.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/constants/elasticSearch.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/constants/redis.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/models/Site.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/models/SitePage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/utility/Browser.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/utility/Database.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/utility/MessageQueue.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/download-html/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extract-meta/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extract-urls/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/import-meta/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/web/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/classes/redis.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/classes/redis.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hostnameQueueProcessor/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hostnameQueueProcessor/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/metaPubSubProcessor/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/metaPubSubProcessor/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pageQueueProcessor/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pageQueueProcessor/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/urlPubSubProcessor/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/urlPubSubProcessor/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +63,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="14.9.0" />
     <property name="javascript.nodejs.core.library.typings.version" value="14.14.6" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/common/constants" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/common/classes" />
     <property name="nodejs_interpreter_path" value="$USER_HOME$/.nvm/versions/node/v14.9.0/bin/node" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="settings.nodejs" />
@@ -82,11 +72,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/common/classes" />
+      <recent name="$PROJECT_DIR$/src/common/utilities" />
       <recent name="$PROJECT_DIR$/src/common/constants" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/src/import-meta" />
-      <recent name="$PROJECT_DIR$/src/download-html" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/common/Classes" />
@@ -169,7 +159,7 @@
       <workItem from="1604268419663" duration="585000" />
       <workItem from="1604269570595" duration="1271000" />
       <workItem from="1604271148285" duration="24917000" />
-      <workItem from="1604355629186" duration="6376000" />
+      <workItem from="1604355629186" duration="13771000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1604275930732</created>
@@ -206,7 +196,21 @@
       <option name="project" value="LOCAL" />
       <updated>1604297375945</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Re-worked the flow">
+      <created>1604365892201</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1604365892201</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Re-worked the flow">
+      <created>1604365924612</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1604365924612</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -229,7 +233,8 @@
     <MESSAGE value="Worked on the database" />
     <MESSAGE value="Worked on the flow" />
     <MESSAGE value="Added docker-compose.yml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added docker-compose.yml" />
+    <MESSAGE value="Re-worked the flow" />
+    <option name="LAST_COMMIT_MESSAGE" value="Re-worked the flow" />
   </component>
   <component name="WindowStateProjectService">
     <state x="693" y="339" width="524" height="441" key="#com.intellij.ide.scriptingContext.ui.PerFileMappingsDialogWrapper" timestamp="1604359035981">
@@ -260,10 +265,10 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="464" y="188" width="992" height="737" key="SettingsEditor/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604359049080" />
-    <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2" timestamp="1604297378137">
+    <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2" timestamp="1604365925605">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604297378137" />
+    <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604365925605" />
     <state x="566" y="167" width="778" height="780" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1604294727351">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>

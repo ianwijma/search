@@ -19,6 +19,7 @@ module.exports = class Redis {
             'set',
             'incr',
             'decr',
+            'publish',
         ].forEach(method => {
             const client = this.getClient();
             this[method] = promisify( client[method] ).bind( client );
