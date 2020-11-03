@@ -2,37 +2,35 @@ const Runner = require('../common/classes/runner');
 const Redis = require('../common/classes/redis');
 const Dom = require('../common/classes/dom');
 const Text = require('../common/classes/text');
-const redisTools = require('../common/utilities/redisTools');
-const { QUEUE_META, PUBSUB_HTML } = require('../common/constants/redis');
+const { QUEUE_META_COLLECT, QUEUE_META_EXTRACT } = require('../common/constants/redis');
 const workerTools = require('../common/utilities/workerTools');
 
 class MetaPubSubProcessor extends Runner {
 
     setup () {
-        this.redis = new Redis();
         const redis = new Redis();
-        this.metaWorker = workerTools.getWorker( QUEUE_META, { redis });
+        this.metaExtractWorker = workerTools.getWorker( QUEUE_META_EXTRACT, {
+            redis: redis.getClient()
+        });
+        this.metaCollectWorker = workerTools.getWorker( QUEUE_META_COLLECT, {
+            redis: redis.getClient()
+        });
     }
 
     run () {
-        const { redis, metaWorker } = this;
-        const client = redis.getClient();
-        redisTools.subscribeData(
-            client,
-            PUBSUB_HTML,
-            async ({ data }) => {
-                const {
-                    html,
-                    hostname,
-                    pathname = '',
-                    search = ''
-                } = data;
-                const meta = await this.getExtractedMeta( html );
-                workerTools.sendData( metaWorker, {
-                    meta, hostname, pathname, search
-                });
-            }
-        )
+        const { metaExtractWorker, metaCollectWorker } = this;
+        workerTools.receiveData(metaExtractWorker, async ({ data }) => {
+            const {
+                html,
+                hostname,
+                pathname = '',
+                search = ''
+            } = data;
+            const meta = await this.getExtractedMeta( html );
+            await workerTools.sendData( metaCollectWorker, {
+                meta, hostname, pathname, search
+            });
+        });
     }
 
     async getExtractedMeta ( html ) {

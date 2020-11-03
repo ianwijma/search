@@ -4,7 +4,7 @@ const { QUEUE_HOSTNAME } = require('../../src/common/constants/redis');
 
 (async function (){
     const worker = workerTools.getWorker( QUEUE_HOSTNAME );
-    workerTools.sendData( worker, 'www.startpagina.nl');
+    await workerTools.sendData( worker, 'www.startpagina.nl');
     console.log('Done!');
 })()
 

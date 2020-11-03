@@ -23,6 +23,8 @@ class UrlTools {
         return new URL( url );
     }
 
+
+
 }
 
 module.exports = new UrlTools();

@@ -10,9 +10,14 @@ class WorkerTools {
     }
 
     sendData ( worker, data ) {
-        const dataString = this._encodeData( data );
-        console.log(`[${worker.queuename}]`, 'Sending data to worker, bytes:', dataString.length);
-        worker.send( dataString );
+        return new Promise((resolve, reject) => {
+            const dataString = this._encodeData( data );
+            console.log(`[${worker.queuename}]`, 'Sending data to worker, bytes:', dataString.length);
+            worker.send( dataString, 0, (err, resp) => {
+                err ? reject(err)
+                    : resolve(resp);
+            });
+        })
     }
 
     receiveData ( worker, promiseCallback ) {

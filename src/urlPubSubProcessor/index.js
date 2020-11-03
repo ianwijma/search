@@ -1,7 +1,7 @@
 const Runner = require('../common/classes/runner');
 const Redis = require('../common/classes/redis');
 const Dom = require('../common/classes/dom');
-const { PUBSUB_HTML, QUEUE_PAGE, QUEUE_HOSTNAME } = require('../common/constants/redis');
+const { QUEUE_PAGE, QUEUE_HOSTNAME, QUEUE_URL_EXTRACT } = require('../common/constants/redis');
 const workerTools = require('../common/utilities/workerTools');
 const redisTools = require('../common/utilities/redisTools');
 const urlTools = require('../common/utilities/urlTools');
@@ -10,40 +10,43 @@ class UrlPubSubProcessor extends Runner {
 
     setup () {
         this.redis = new Redis();
-        const redis = new Redis();
-        this.hostnameWorker = workerTools.getWorker( QUEUE_HOSTNAME, { redis });
-        this.pageWorker = workerTools.getWorker( QUEUE_PAGE, { redis });
+        this.urlExtractWorker = workerTools.getWorker( QUEUE_URL_EXTRACT, {
+            redis: this.redis.getClient()
+        });
+        this.hostnameWorker = workerTools.getWorker( QUEUE_HOSTNAME, {
+            redis: this.redis.getClient()
+        });
+        this.pageWorker = workerTools.getWorker( QUEUE_PAGE, {
+            redis: this.redis.getClient()
+        });
     }
 
     run () {
-        const { redis } = this;
-        const client = redis.getClient();
-        redisTools.subscribeData(
-            client,
-            PUBSUB_HTML,
-            async ({ data }) => {
-                const {
-                    html,
-                    hostname
-                } = data;
-                const dom = new Dom( html );
-                const body = dom.getBody();
-                const links = dom.queryLinks( body );
-                links.forEach(({ link }) => {
-                    if ( this.canProcessHref( link ) ) {
-                        if ( link.startsWith('/') ) {
-                            link = urlTools.buildUrl( hostname, link );
-                        }
+        const { urlExtractWorker } = this;
+        workerTools.receiveData(urlExtractWorker, async ({ data }) => {
+            const {
+                html,
+                hostname
+            } = data;
+            const dom = new Dom( html );
+            const body = dom.getBody();
+            const links = dom.queryLinks( body );
+            links.forEach(({ link }) => {
+                if ( this.canProcessHref( link ) ) {
+                    if ( link.startsWith('/') ) {
+                        link = urlTools.buildUrl( hostname, link );
+                    }
 
+                    if ( link.startsWith('http') ) {
                         const linkUrl = new URL( link );
                         const { hostname: linkHostname } = linkUrl;
                         !!linkHostname && linkHostname === hostname
                             ? this.publishPageQueue( linkUrl )
                             : this.publishHostnameQueue( linkUrl );
                     }
-                });
-            }
-        );
+                }
+            });
+        });
     }
 
     canProcessHref ( hrefString ) {
@@ -52,14 +55,14 @@ class UrlPubSubProcessor extends Runner {
                 && hrefString.trim() !== '';
     }
 
-    publishPageQueue ({ hostname, pathname, search }) {
-        workerTools.sendData( this.pageWorker, {
-            hostname, pathname, search
-        });
+    async publishPageQueue ({ hostname, pathname, search }) {
+        const { pageWorker, redis } = this;
+        await workerTools.sendData( pageWorker, { hostname, pathname, search });
+        await redisTools.pageUpdated( redis, hostname, pathname, search );
     }
 
-    publishHostnameQueue ({ hostname }) {
-        workerTools.sendData( this.hostnameWorker, hostname);
+    async publishHostnameQueue ({ hostname }) {
+        await workerTools.sendData( this.hostnameWorker, hostname);
     }
 
 }

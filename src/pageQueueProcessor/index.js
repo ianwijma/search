@@ -1,9 +1,8 @@
 const Runner = require('../common/classes/runner');
 const workerTools = require('../common/utilities/workerTools');
-const redisTools = require('../common/utilities/redisTools');
 const urlTools = require('../common/utilities/urlTools');
 const Redis = require('../common/classes/redis');
-const { QUEUE_PAGE, PUBSUB_HTML } = require('../common/constants/redis');
+const { QUEUE_PAGE, QUEUE_META_EXTRACT, QUEUE_URL_EXTRACT } = require('../common/constants/redis');
 const puppeteer = require('puppeteer');
 
 class PageQueueProcessor extends Runner {
@@ -14,6 +13,12 @@ class PageQueueProcessor extends Runner {
         this.pageWorker = workerTools.getWorker( QUEUE_PAGE, {
             redis: this.redis.getClient()
         });
+        this.metaExtractWorker = workerTools.getWorker( QUEUE_META_EXTRACT, {
+            redis: this.redis.getClient()
+        });
+        this.urlExtractWorker = workerTools.getWorker( QUEUE_URL_EXTRACT, {
+            redis: this.redis.getClient()
+        });
     }
 
     run () {
@@ -22,7 +27,7 @@ class PageQueueProcessor extends Runner {
             const { hostname, pathname = '', search = '' } = data;
             const url = urlTools.buildUrl( hostname, pathname, search );
             const html = await this.getHtml( url );
-            this.publishHTML( html, hostname, pathname, search );
+            await this.publishHTML( html, hostname, pathname, search );
         });
     }
 
@@ -37,13 +42,13 @@ class PageQueueProcessor extends Runner {
         return html;
     }
 
-    publishHTML ( html, hostname, pathname = '', search = '' ) {
-        redisTools.publishData( this.redis.getClient(), PUBSUB_HTML, {
-            html,
-            hostname,
-            pathname,
-            search,
-        });
+    async publishHTML ( html, hostname, pathname = '', search = '' ) {
+        const { metaExtractWorker, urlExtractWorker } = this;
+        const data = { html, hostname, pathname, search };
+        await Promise.all([
+            workerTools.sendData( metaExtractWorker, data ),
+            workerTools.sendData( urlExtractWorker, data ),
+        ]);
     }
 
 }
