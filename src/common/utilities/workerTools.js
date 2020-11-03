@@ -9,6 +9,23 @@ class WorkerTools {
         });
     }
 
+    async updateWorkerSettings ( worker, options ) {
+        return new Promise(((resolve, reject) => {
+            const name = worker.queuename;
+            const update = {
+                qname: name,
+                ...options,
+            };
+            console.log(`[${name}]`, 'Updating worker settings, update:', update);
+            // Documentation: https://github.com/smrchy/rsmq#setqueueattributesoptions-callback
+            worker.queue.setQueueAttributes(update, (err, resp) => {
+                err
+                    ? reject(err)
+                    : resolve(resp);
+            });
+        }))
+    }
+
     sendData ( worker, data ) {
         return new Promise((resolve, reject) => {
             const dataString = this._encodeData( data );

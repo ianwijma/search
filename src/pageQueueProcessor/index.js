@@ -19,6 +19,10 @@ class PageQueueProcessor extends Runner {
         this.urlExtractWorker = workerTools.getWorker( QUEUE_URL_EXTRACT, {
             redis: this.redis.getClient()
         });
+
+        const maxsize = -1;
+        await workerTools.updateWorkerSettings( this.metaExtractWorker, { maxsize })
+        await workerTools.updateWorkerSettings( this.urlExtractWorker, { maxsize })
     }
 
     run () {
