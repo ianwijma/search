@@ -57,8 +57,10 @@ class UrlPubSubProcessor extends Runner {
 
     async publishPageQueue ({ hostname, pathname, search }) {
         const { pageWorker, redis } = this;
-        await workerTools.sendData( pageWorker, { hostname, pathname, search });
-        await redisTools.pageUpdated( redis, hostname, pathname, search );
+        if ( await redisTools.canQueuePage( redis, hostname, pathname, search ) ) {
+            await workerTools.sendData( pageWorker, { hostname, pathname, search });
+            await redisTools.pageUpdated( redis, hostname, pathname, search );
+        }
     }
 
     async publishHostnameQueue ({ hostname }) {
