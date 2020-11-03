@@ -45,8 +45,12 @@ class MetaPubSubProcessor extends Runner {
         const head = dom.getHead();
         const body = dom.getBody();
 
-        meta['title'] = dom.queryInnerText( head, 'title' );
-        meta['keywords'] = dom.queryAttribute( head, 'meta[name=keywords]', 'content' );
+        const title = dom.queryInnerText( head, 'title' );
+        meta['title'] = title;
+
+        const keywords = dom.queryAttribute( head, 'meta[name=keywords]', 'content' ) || '';
+        meta['keywords'] = keywords.split(',').filter(s => !!s).map(s => s.trim());
+
         meta['description'] = dom.queryAttribute( head, 'meta[name=description]', 'content' );
         meta['h1'] = dom.queryAllInnerText( body, 'h1' );
         meta['h2'] = dom.queryAllInnerText( body, 'h2' );
@@ -59,8 +63,16 @@ class MetaPubSubProcessor extends Runner {
         meta['images'] = dom.queryImages( body );
 
         const text = new Text( body.innerText );
-        meta['content_key_words'] = await text.getKeyWords( 100 );
-        meta['content_key_phrases'] = await text.getKeyPhrases( 100 );
+        const [
+            keyword, keyPhrases, summary
+        ] = Promise.all([
+            text.getKeyWords( 100 ),
+            text.getKeyPhrases( 100 ),
+            text.getSummary( title ),
+        ]);
+        meta['content_key_words'] = keyword;
+        meta['content_key_phrases'] = keyPhrases;
+        meta['content_summary'] = summary;
 
         return meta;
     }

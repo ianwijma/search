@@ -13,6 +13,8 @@ const Latin = require('retext-latin');
 // Detector
 const LanguageDetect = require('languagedetect');
 
+const SummaryTool = require('node-summary');
+
 module.exports = class Text {
 
     constructor( content ) {
@@ -86,6 +88,16 @@ module.exports = class Text {
                 .use(keywords, { maximum })
                 .process(this.getVFile(), done);
         });
+    }
+
+    getSummary ( title ) {
+        return new Promise((resolve, reject) => {
+            SummaryTool.summarize(title, this.content, (err, summary) => {
+                err
+                    ? reject( err )
+                    : resolve( summary);
+            })
+        })
     }
 
 }

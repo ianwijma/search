@@ -22,7 +22,7 @@ class PageQueueProcessor extends Runner {
             const { hostname, pathname = '', search = '' } = data;
             const url = urlTools.buildUrl( hostname, pathname, search );
             const html = await this.getHtml( url );
-            this.publishHTML( html, hostname, pathname );
+            this.publishHTML( html, hostname, pathname, search );
         });
     }
 
@@ -37,11 +37,12 @@ class PageQueueProcessor extends Runner {
         return html;
     }
 
-    publishHTML ( html, hostname, pathname ) {
+    publishHTML ( html, hostname, pathname = '', search = '' ) {
         redisTools.publishData( this.redis.getClient(), PUBSUB_HTML, {
             html,
             hostname,
-            pathname
+            pathname,
+            search,
         });
     }
 

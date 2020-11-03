@@ -20,8 +20,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d04128bd-ef64-4b72-830b-1790dcb187c5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/common/classes/text.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/classes/text.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/constants/redis.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/constants/redis.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/elasticSearchProcessor/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/elasticSearchProcessor/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/metaPubSubProcessor/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/metaPubSubProcessor/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/metaQueueProcessor/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/metaQueueProcessor/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pageQueueProcessor/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pageQueueProcessor/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +64,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="14.9.0" />
     <property name="javascript.nodejs.core.library.typings.version" value="14.14.6" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/common/classes" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/common/models" />
     <property name="nodejs_interpreter_path" value="$USER_HOME$/.nvm/versions/node/v14.9.0/bin/node" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="settings.nodejs" />
@@ -66,11 +73,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/common/models" />
       <recent name="$PROJECT_DIR$/src/common/classes" />
       <recent name="$PROJECT_DIR$/src/common/utilities" />
       <recent name="$PROJECT_DIR$/src/common/constants" />
       <recent name="$PROJECT_DIR$/src" />
-      <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/common/Classes" />
@@ -153,7 +160,7 @@
       <workItem from="1604268419663" duration="585000" />
       <workItem from="1604269570595" duration="1271000" />
       <workItem from="1604271148285" duration="24917000" />
-      <workItem from="1604355629186" duration="14913000" />
+      <workItem from="1604355629186" duration="17132000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1604275930732</created>
@@ -218,7 +225,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604374367752</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Worked on the language detector">
+      <created>1604374426600</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1604374426600</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -275,10 +289,10 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="464" y="188" width="992" height="737" key="SettingsEditor/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604359049080" />
-    <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2" timestamp="1604374368963">
+    <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2" timestamp="1604374427560">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604374368963" />
+    <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604374427560" />
     <state x="566" y="167" width="778" height="780" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1604294727351">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -295,10 +309,14 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="1969" y="159" width="1599" height="669" maximized="true" key="dock-window-3/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604287764041" />
-    <state x="624" y="252" key="run.anything.popup" timestamp="1604365153475">
+    <state x="669" y="297" width="581" height="512" key="find.popup" timestamp="1604376382045">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="624" y="252" key="run.anything.popup/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604365153475" />
+    <state x="669" y="297" width="581" height="512" key="find.popup/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604376382045" />
+    <state x="624" y="252" key="run.anything.popup" timestamp="1604375304846">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="624" y="252" key="run.anything.popup/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604375304846" />
     <state x="623" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1604273947989">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
