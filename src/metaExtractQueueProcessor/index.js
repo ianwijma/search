@@ -44,30 +44,30 @@ class MetaPubSubProcessor extends Runner {
         const keywords = dom.queryAttribute( head, 'meta[name=keywords]', 'content' ) || '';
         meta['keywords'] = keywords.split(',').filter(s => !!s).map(s => s.trim());
 
-        meta['title'] = dom.queryText( head, 'title' );
-        meta['description'] = dom.queryAttribute( head, 'meta[name=description]', 'content' );
-        meta['h1'] = dom.queryAllText( body, 'h1' );
-        meta['h2'] = dom.queryAllText( body, 'h2' );
-        meta['h3'] = dom.queryAllText( body, 'h3' );
-        meta['h4'] = dom.queryAllText( body, 'h4' );
-        meta['h5'] = dom.queryAllText( body, 'h5' );
-        meta['h6'] = dom.queryAllText( body, 'h6' );
-        meta['h6'] = dom.queryAllText( body, 'h6' );
-        meta['links'] = dom.queryLinks( body );
-        meta['images'] = dom.queryImages( body );
+        meta['title'] = dom.queryText( head, 'title' ) || '';
+        meta['description'] = dom.queryAttribute( head, 'meta[name=description]', 'content' ) || '';
+        meta['h1'] = dom.queryAllText( body, 'h1' ) || [];
+        meta['h2'] = dom.queryAllText( body, 'h2' ) || [];
+        meta['h3'] = dom.queryAllText( body, 'h3' ) || [];
+        meta['h4'] = dom.queryAllText( body, 'h4' ) || [];
+        meta['h5'] = dom.queryAllText( body, 'h5' ) || [];
+        meta['h6'] = dom.queryAllText( body, 'h6' ) || [];
+        meta['h6'] = dom.queryAllText( body, 'h6' ) || [];
+        meta['links'] = dom.queryLinks( body ) || [];
+        meta['images'] = dom.queryImages( body ) || [];
 
         const textObject = new Text( body.textContent );
 
         const [
             keyword, keyPhrases, summary
         ] = await Promise.all([
-            textObject.getKeyWords( 100 ),
-            textObject.getKeyPhrases( 100 ),
-            textObject.getSummary(),
+            textObject.getKeyWords( 50 ),
+            textObject.getKeyPhrases( 25 ),
+            textObject.getSummary( 1 ),
         ]);
-        meta['content_key_words'] = keyword;
-        meta['content_key_phrases'] = keyPhrases;
-        meta['content_summary'] = summary;
+        meta['content_keywords'] = keyword || [];
+        meta['content_keyphrases'] = keyPhrases || [];
+        meta['content_summary'] = summary || '';
 
         return meta;
     }
