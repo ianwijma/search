@@ -21,7 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d04128bd-ef64-4b72-830b-1790dcb187c5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/utilities/workerTools.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/utilities/workerTools.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/elasticSearchProcessor/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/elasticSearchProcessor/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/metaQueueProcessor/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/metaQueueProcessor/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/urlPubSubProcessor/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/urlPubSubProcessor/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -79,7 +80,7 @@
       <recent name="$PROJECT_DIR$/elasticsearch-config" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.dev:run">
+  <component name="RunManager" selected="npm.dev:run:metaQueueProcessor">
     <configuration name="dev:run" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -132,8 +133,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev:run" />
         <item itemvalue="npm.dev:run:metaQueueProcessor" />
+        <item itemvalue="npm.dev:run" />
         <item itemvalue="npm.dev:run:metaPubSubProcessor" />
         <item itemvalue="npm.dev:run:hostnameQueueProcessor" />
         <item itemvalue="npm.dev:run:pageQueueProcessor" />
@@ -151,7 +152,7 @@
       <workItem from="1604268419663" duration="585000" />
       <workItem from="1604269570595" duration="1271000" />
       <workItem from="1604271148285" duration="24917000" />
-      <workItem from="1604355629186" duration="26328000" />
+      <workItem from="1604355629186" duration="27207000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1604275930732</created>
@@ -300,7 +301,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604393000964</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Fixed the data flow of the pubsub">
+      <created>1604393758716</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1604393758716</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -344,30 +352,30 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="743" y="300" width="424" height="519" key="FileChooserDialogImpl/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604359033183" />
-    <state width="1878" height="451" key="GridCell.Tab.0.bottom" timestamp="1604393574972">
+    <state width="1878" height="451" key="GridCell.Tab.0.bottom" timestamp="1604394481372">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="451" key="GridCell.Tab.0.bottom/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604393574972" />
-    <state width="1878" height="451" key="GridCell.Tab.0.center" timestamp="1604393574972">
+    <state width="1878" height="451" key="GridCell.Tab.0.bottom/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604394481372" />
+    <state width="1878" height="451" key="GridCell.Tab.0.center" timestamp="1604394481372">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="451" key="GridCell.Tab.0.center/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604393574972" />
-    <state width="1878" height="451" key="GridCell.Tab.0.left" timestamp="1604393574971">
+    <state width="1878" height="451" key="GridCell.Tab.0.center/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604394481372" />
+    <state width="1878" height="451" key="GridCell.Tab.0.left" timestamp="1604394481372">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="451" key="GridCell.Tab.0.left/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604393574971" />
-    <state width="1878" height="451" key="GridCell.Tab.0.right" timestamp="1604393574972">
+    <state width="1878" height="451" key="GridCell.Tab.0.left/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604394481372" />
+    <state width="1878" height="451" key="GridCell.Tab.0.right" timestamp="1604394481372">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="451" key="GridCell.Tab.0.right/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604393574972" />
+    <state width="1878" height="451" key="GridCell.Tab.0.right/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604394481372" />
     <state x="464" y="188" width="992" height="737" key="SettingsEditor" timestamp="1604359049080">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="464" y="188" width="992" height="737" key="SettingsEditor/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604359049080" />
-    <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2" timestamp="1604393003140">
+    <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2" timestamp="1604393761016">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604393003140" />
+    <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604393761016" />
     <state x="566" y="167" width="778" height="780" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1604391915474">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -380,14 +388,14 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="1920" y="192" width="1599" height="517" key="dock-window-2/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604381386554" />
-    <state x="1969" y="159" width="1599" height="669" maximized="true" key="dock-window-3" timestamp="1604287764041">
+    <state x="1920" y="0" width="1599" height="696" key="dock-window-3" timestamp="1604394455310">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="1969" y="159" width="1599" height="669" maximized="true" key="dock-window-3/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604287764041" />
-    <state x="669" y="297" width="581" height="512" key="find.popup" timestamp="1604376382045">
+    <state x="1920" y="0" width="1599" height="696" key="dock-window-3/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604394455310" />
+    <state x="669" y="297" width="581" height="512" key="find.popup" timestamp="1604394253487">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="669" y="297" width="581" height="512" key="find.popup/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604376382045" />
+    <state x="669" y="297" width="581" height="512" key="find.popup/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604394253487" />
     <state x="624" y="252" key="run.anything.popup" timestamp="1604381102054">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>

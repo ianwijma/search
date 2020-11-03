@@ -36,7 +36,8 @@ class UrlPubSubProcessor extends Runner {
                         }
 
                         const linkUrl = new URL( link );
-                        linkUrl.hostname === hostname
+                        const { hostname: linkHostname } = linkUrl;
+                        !!linkHostname && linkHostname === hostname
                             ? this.publishPageQueue( linkUrl )
                             : this.publishHostnameQueue( linkUrl );
                     }
