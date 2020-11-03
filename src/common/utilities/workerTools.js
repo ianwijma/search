@@ -24,7 +24,6 @@ class WorkerTools {
                 .then(() => next())
                 .catch(err => {
                     console.error(`[ERROR-${worker.queuename}]`, err);
-                    next();
                 });
         });
     }

@@ -20,7 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d04128bd-ef64-4b72-830b-1790dcb187c5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/utilities/workerTools.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/utilities/workerTools.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/urlPubSubProcessor/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/urlPubSubProcessor/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,6 +110,16 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="dev:run:metaQueueProcessor" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev:run:metaQueueProcessor" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="dev:run:pageQueueProcessor" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -118,23 +130,13 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="dev:run:urlPubSubProcessor" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="dev:run:urlPubSubProcessor" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="npm.dev:run" />
+        <item itemvalue="npm.dev:run:metaQueueProcessor" />
         <item itemvalue="npm.dev:run:metaPubSubProcessor" />
         <item itemvalue="npm.dev:run:hostnameQueueProcessor" />
         <item itemvalue="npm.dev:run:pageQueueProcessor" />
-        <item itemvalue="npm.dev:run:urlPubSubProcessor" />
       </list>
     </recent_temporary>
   </component>
@@ -149,7 +151,7 @@
       <workItem from="1604268419663" duration="585000" />
       <workItem from="1604269570595" duration="1271000" />
       <workItem from="1604271148285" duration="24917000" />
-      <workItem from="1604355629186" duration="25705000" />
+      <workItem from="1604355629186" duration="26328000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1604275930732</created>
@@ -291,7 +293,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604392973551</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Fixed the data flow of the pubsub">
+      <created>1604393000964</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1604393000964</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -335,30 +344,30 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="743" y="300" width="424" height="519" key="FileChooserDialogImpl/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604359033183" />
-    <state width="1878" height="321" key="GridCell.Tab.0.bottom" timestamp="1604392878299">
+    <state width="1878" height="451" key="GridCell.Tab.0.bottom" timestamp="1604393574972">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="321" key="GridCell.Tab.0.bottom/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604392878299" />
-    <state width="1878" height="321" key="GridCell.Tab.0.center" timestamp="1604392878299">
+    <state width="1878" height="451" key="GridCell.Tab.0.bottom/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604393574972" />
+    <state width="1878" height="451" key="GridCell.Tab.0.center" timestamp="1604393574972">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="321" key="GridCell.Tab.0.center/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604392878299" />
-    <state width="1878" height="321" key="GridCell.Tab.0.left" timestamp="1604392878299">
+    <state width="1878" height="451" key="GridCell.Tab.0.center/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604393574972" />
+    <state width="1878" height="451" key="GridCell.Tab.0.left" timestamp="1604393574971">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="321" key="GridCell.Tab.0.left/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604392878299" />
-    <state width="1878" height="321" key="GridCell.Tab.0.right" timestamp="1604392878299">
+    <state width="1878" height="451" key="GridCell.Tab.0.left/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604393574971" />
+    <state width="1878" height="451" key="GridCell.Tab.0.right" timestamp="1604393574972">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="321" key="GridCell.Tab.0.right/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604392878299" />
+    <state width="1878" height="451" key="GridCell.Tab.0.right/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604393574972" />
     <state x="464" y="188" width="992" height="737" key="SettingsEditor" timestamp="1604359049080">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="464" y="188" width="992" height="737" key="SettingsEditor/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604359049080" />
-    <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2" timestamp="1604392974455">
+    <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2" timestamp="1604393003140">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604392974455" />
+    <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604393003140" />
     <state x="566" y="167" width="778" height="780" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1604391915474">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>

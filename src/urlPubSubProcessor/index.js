@@ -47,8 +47,8 @@ class UrlPubSubProcessor extends Runner {
 
     canProcessHref ( hrefString ) {
         return  !!hrefString
-                || hrefString !== '#'
-                || hrefString !== '';
+                && hrefString.trim() !== '#'
+                && hrefString.trim() !== '';
     }
 
     publishPageQueue ({ hostname, pathname, search }) {
