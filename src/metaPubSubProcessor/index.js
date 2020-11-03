@@ -42,7 +42,6 @@ class MetaPubSubProcessor extends Runner {
 
         const meta = {};
 
-        const head = dom.getLang();
         const head = dom.getHead();
         const body = dom.getBody();
 

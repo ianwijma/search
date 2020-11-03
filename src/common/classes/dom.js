@@ -10,6 +10,14 @@ module.exports = class Dom {
         return this.d.window.document;
     }
 
+    getLang() {
+        return this.getHtml().lang;
+    }
+
+    getHtml() {
+        return this.getDocument().querySelector('html');
+    }
+
     getHead() {
         return this.getDocument().querySelector('head');
     }

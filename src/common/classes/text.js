@@ -1,13 +1,35 @@
+// Retext dependencies
 const retext = require('retext');
 const pos = require('retext-pos');
 const keywords = require('retext-keywords');
 const toString = require('nlcst-to-string');
 const vfile = require('vfile');
 
+// Languages for retext
+const English = require('retext-english');
+const Dutch = require('retext-dutch');
+const Latin = require('retext-latin');
+
+// Detector
+const LanguageDetect = require('languagedetect');
+
 module.exports = class Text {
 
     constructor( content ) {
-        this.content;
+        this.content = content;
+    }
+
+    getLanguage () {
+        if ( !this.language ) {
+            const detector = new LanguageDetect();
+            const results = detector.detect( this.content );
+            const result = results[0];
+            if (result) {
+                this.language = result[0];
+            }
+        }
+
+        return this.language;
     }
 
     getVFile() {
@@ -16,6 +38,19 @@ module.exports = class Text {
         }
 
         return this.vfile;
+    }
+
+    getRetextLanguage() {
+        const language = this.getLanguage();
+        switch ( language ) {
+            case 'dutch':
+                return Dutch;
+            case 'latin':
+                return Latin;
+            case 'english':
+            default:
+                return English;
+        }
     }
 
     getKeywords ( maximum = 25 ) {
@@ -27,6 +62,7 @@ module.exports = class Text {
             }
 
             retext()
+                .use(this.getRetextLanguage())
                 .use(pos)
                 .use(keywords, { maximum })
                 .process(this.getVFile(), done);
@@ -45,6 +81,7 @@ module.exports = class Text {
             }
 
             retext()
+                .use(this.getRetextLanguage())
                 .use(pos)
                 .use(keywords, { maximum })
                 .process(this.getVFile(), done);
