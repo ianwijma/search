@@ -21,17 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d04128bd-ef64-4b72-830b-1790dcb187c5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/dev/push-startpagina.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/dev/push-startpagina.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/classes/text.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/classes/text.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/models/siteMetaData.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/models/siteMetaData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/utilities/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/utilities/database.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/utilities/redisTools.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/utilities/redisTools.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/utilities/workerTools.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/utilities/workerTools.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hostnameQueueProcessor/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hostnameQueueProcessor/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/metaPubSubProcessor/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/metaPubSubProcessor/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/metaQueueProcessor/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/metaQueueProcessor/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +77,7 @@
       <recent name="$PROJECT_DIR$/elasticsearch-config" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.dev:run">
+  <component name="RunManager" selected="npm.dev:run:metaPubSubProcessor">
     <configuration name="dev:run" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -140,11 +130,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.dev:run:metaPubSubProcessor" />
         <item itemvalue="npm.dev:run" />
         <item itemvalue="npm.dev:run:hostnameQueueProcessor" />
         <item itemvalue="npm.dev:run:pageQueueProcessor" />
         <item itemvalue="npm.dev:run:urlPubSubProcessor" />
-        <item itemvalue="npm.dev:run:metaPubSubProcessor" />
       </list>
     </recent_temporary>
   </component>
@@ -159,7 +149,7 @@
       <workItem from="1604268419663" duration="585000" />
       <workItem from="1604269570595" duration="1271000" />
       <workItem from="1604271148285" duration="24917000" />
-      <workItem from="1604355629186" duration="20460000" />
+      <workItem from="1604355629186" duration="20654000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1604275930732</created>
@@ -259,7 +249,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604377522320</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Worked on the dataflow">
+      <created>1604380104406</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1604380104406</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -289,7 +286,8 @@
     <MESSAGE value="Added pushing to elasticSearch" />
     <MESSAGE value="Updated the package json" />
     <MESSAGE value="Fixed mondoDB connnection" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed mondoDB connnection" />
+    <MESSAGE value="Worked on the dataflow" />
+    <option name="LAST_COMMIT_MESSAGE" value="Worked on the dataflow" />
   </component>
   <component name="WindowStateProjectService">
     <state x="693" y="339" width="524" height="441" key="#com.intellij.ide.scriptingContext.ui.PerFileMappingsDialogWrapper" timestamp="1604359035981">
@@ -300,30 +298,30 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="743" y="300" width="424" height="519" key="FileChooserDialogImpl/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604359033183" />
-    <state width="1878" height="379" key="GridCell.Tab.0.bottom" timestamp="1604379777975">
+    <state width="1878" height="244" key="GridCell.Tab.0.bottom" timestamp="1604380126951">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="379" key="GridCell.Tab.0.bottom/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604379777975" />
-    <state width="1878" height="379" key="GridCell.Tab.0.center" timestamp="1604379777975">
+    <state width="1878" height="244" key="GridCell.Tab.0.bottom/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604380126951" />
+    <state width="1878" height="244" key="GridCell.Tab.0.center" timestamp="1604380126951">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="379" key="GridCell.Tab.0.center/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604379777975" />
-    <state width="1878" height="379" key="GridCell.Tab.0.left" timestamp="1604379777975">
+    <state width="1878" height="244" key="GridCell.Tab.0.center/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604380126951" />
+    <state width="1878" height="244" key="GridCell.Tab.0.left" timestamp="1604380126951">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="379" key="GridCell.Tab.0.left/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604379777975" />
-    <state width="1878" height="379" key="GridCell.Tab.0.right" timestamp="1604379777975">
+    <state width="1878" height="244" key="GridCell.Tab.0.left/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604380126951" />
+    <state width="1878" height="244" key="GridCell.Tab.0.right" timestamp="1604380126951">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="379" key="GridCell.Tab.0.right/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604379777975" />
+    <state width="1878" height="244" key="GridCell.Tab.0.right/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604380126951" />
     <state x="464" y="188" width="992" height="737" key="SettingsEditor" timestamp="1604359049080">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="464" y="188" width="992" height="737" key="SettingsEditor/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604359049080" />
-    <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2" timestamp="1604377308906">
+    <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2" timestamp="1604380105333">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604377308906" />
+    <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604380105333" />
     <state x="566" y="167" width="778" height="780" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1604294727351">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>

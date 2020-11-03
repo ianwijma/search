@@ -6,8 +6,6 @@ const redisTools = require('../common/utilities/redisTools');
 const { QUEUE_META, PUBSUB_HTML } = require('../common/constants/redis');
 const workerTools = require('../common/utilities/workerTools');
 
-
-
 class MetaPubSubProcessor extends Runner {
 
     setup () {
@@ -77,6 +75,6 @@ class MetaPubSubProcessor extends Runner {
         return meta;
     }
 
-
-
 }
+
+(new MetaPubSubProcessor()).start();
