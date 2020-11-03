@@ -53,7 +53,7 @@ module.exports = class Text {
         }
     }
 
-    getKeywords ( maximum = 25 ) {
+    getKeyWords ( maximum = 25 ) {
         return new Promise(resolve => {
             const done = (err, file) => {
                 file.data.keywords.forEach(function(keyword) {

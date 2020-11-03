@@ -59,7 +59,7 @@ class MetaPubSubProcessor extends Runner {
         meta['images'] = dom.queryImages( body );
 
         const text = new Text( body.innerText );
-        meta['content_key_words'] = await text.getKeywords( 100 );
+        meta['content_key_words'] = await text.getKeyWords( 100 );
         meta['content_key_phrases'] = await text.getKeyPhrases( 100 );
 
         return meta;
