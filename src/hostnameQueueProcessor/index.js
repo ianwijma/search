@@ -21,7 +21,7 @@ class HostnameQueueProcessor extends Runner {
         workerTools.receiveData( hostnameWorker, async ({ data: hostname }) => {
             const updateKey = workerTools.createKey( PREFIX_PAGE_UPDATED, hostname );
             const counterKey = workerTools.createKey( PREFIX_PAGE_COUNTER, hostname );
-            if ( this.shouldProcess( updateKey ) ) {
+            if ( await this.shouldProcess( updateKey ) ) {
                 await workerTools.sendData( pageWorker, { hostname } );
                 redis.set( updateKey, Date.now() );
                 redis.incr( counterKey );
@@ -29,8 +29,10 @@ class HostnameQueueProcessor extends Runner {
         });
     }
 
-    shouldProcess ( key ) {
-        const updatedString = this.redis.get( key );
+    async shouldProcess ( key ) {
+        const updatedString = await this.redis.get( key );
+        if ( !updatedString ) return true;
+
         const updatedAt = updatedString ? new Date(updatedString) : Date.now();
         const now = Date.now();
         return ( now - updatedAt ) > UPDATE_DIFFERENCE_MS;

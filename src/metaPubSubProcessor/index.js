@@ -68,7 +68,7 @@ class MetaPubSubProcessor extends Runner {
         ] = Promise.all([
             text.getKeyWords( 100 ),
             text.getKeyPhrases( 100 ),
-            text.getSummary( title ),
+            text.getSummary(),
         ]);
         meta['content_key_words'] = keyword;
         meta['content_key_phrases'] = keyPhrases;

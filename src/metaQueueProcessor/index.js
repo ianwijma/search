@@ -3,7 +3,7 @@ const Redis = require('../common/classes/redis');
 const workerTools = require('../common/utilities/workerTools');
 const database = require('../common/utilities/database');
 const SiteMetaData = require('../common/models/siteMetaData');
-const { PREFIX_PAGE_COUNTER, QUEUE_PROCESSED_SITES } = require('../common/constants/redis');
+const { PREFIX_PAGE_COUNTER, QUEUE_PROCESSED_SITES, QUEUE_META } = require('../common/constants/redis');
 
 
 class MetaQueueProcessor extends Runner {

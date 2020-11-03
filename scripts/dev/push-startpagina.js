@@ -1,16 +1,10 @@
-const AbstractRunner = require('../../src/common/AbstractRunner.js');
-const RSMQWorker = require('rsmq-worker');
-const { QUEUE_DOWNLOAD_HTML } = require('../../src/common/constants/redis');
+const Redis = require('../../src/common/classes/redis');
+const workerTools = require('../../src/common/utilities/workerTools');
+const { QUEUE_HOSTNAME } = require('../../src/common/constants/redis');
 
 (async function (){
-    const worker = new RSMQWorker( QUEUE_DOWNLOAD_HTML, {
-        autostart: true,
-    });
-
-    (new AbstractRunner()).sendWorkerMessage(worker, {
-        url: 'https://www.startpagina.nl/'
-    });
-
+    const worker = workerTools.getWorker( QUEUE_HOSTNAME );
+    workerTools.sendData( worker, 'www.startpagina.nl');
     console.log('Done!');
 })()
 

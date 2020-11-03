@@ -3,21 +3,27 @@ const RSMQWorker = require('rsmq-worker');
 class WorkerTools {
 
     getWorker ( name, options = {} ) {
-        return new RSMQWorker( RSMQWorker, options);
+        return new RSMQWorker( name, {
+            ...options,
+            autostart: true
+        });
     }
 
     sendData ( worker, data ) {
         const dataString = this._encodeData( data );
+        console.log(`[${worker.queuename}]`, 'Sending data to worker');
         worker.send( dataString );
     }
 
     receiveData ( worker, promiseCallback ) {
+        console.log(`[${worker.queuename}]`, 'Listening for data');
         worker.on('message', (dataString, next, dataId) => {
+            console.log(`[${worker.queuename}]`, 'Received data for worker');
             const data = this._decodeData( dataString, dataId );
             promiseCallback( data )
                 .then(() => next())
                 .catch(err => {
-                    console.error('[ERROR]', err);
+                    console.error(`[ERROR-${worker.queuename}]`, err);
                     next();
                 });
         });

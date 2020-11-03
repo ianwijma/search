@@ -13,7 +13,7 @@ const Latin = require('retext-latin');
 // Detector
 const LanguageDetect = require('languagedetect');
 
-const SummaryTool = require('node-summary');
+const { SummarizerManager } = require('node-summarizer');
 
 module.exports = class Text {
 
@@ -90,13 +90,11 @@ module.exports = class Text {
         });
     }
 
-    getSummary ( title ) {
+    getSummary ( sentences = 10 ) {
         return new Promise((resolve, reject) => {
-            SummaryTool.summarize(title, this.content, (err, summary) => {
-                err
-                    ? reject( err )
-                    : resolve( summary);
-            })
+            const Summarizer = new SummarizerManager(this.content, sentences);
+            const { summary } = Summarizer.getSummaryByFrequency()
+            resolve( summary );
         })
     }
 

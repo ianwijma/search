@@ -2,11 +2,14 @@ class RedisTools {
 
     publishData ( redisClient, channel, data ) {
         const dataString = this._encodeData( data );
+        console.log(`[${channel}]`, 'Publishing data to subscribers');
         redisClient.publish( channel, dataString );
     }
 
     subscribeData ( redisClient, subscribeChannel, promiseCallback ) {
+        console.log(`[${subscribeChannel}]`, 'Subscribing to publishers');
         redisClient.on('message', (channel, dataString) => {
+            console.log(`[${subscribeChannel}]`, 'publishers data received');
             if (channel !== subscribeChannel) return;
 
             const data = this._decodeData( dataString );

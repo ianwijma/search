@@ -3,10 +3,10 @@ const { String, Object } = Schema;
 
 const name = 'SiteMetaData';
 const schema = new Schema({
-    hostname: String,
-    pathname: String,
-    search: String,
-    meta: Object,
+    hostname: 'string',
+    pathname: 'string',
+    search: 'string',
+    meta: 'object',
 });
 
 module.exports = model( name, schema );

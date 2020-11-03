@@ -6,6 +6,7 @@ class Database {
         if ( !this.connected ) {
             connect('mongodb://localhost/search-tmp-dev', {
                 useNewUrlParser: true,
+                useUnifiedTopology: true,
             });
             this.connected = true;
         }
