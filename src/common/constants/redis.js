@@ -1,6 +1,10 @@
 module.exports = {
-    QUEUE_DOWNLOAD_HTML: 'queue-download-html',
-    QUEUE_EXTRACT_META: 'queue-extract-meta',
-    QUEUE_IMPORT_META: 'queue-import-meta',
-    QUEUE_EXTRACT_URLS: 'queue-extract-urls',
+    QUEUE_HOSTNAME: 'queue-hostname',
+    QUEUE_PAGE: 'queue-page',
+    QUEUE_META: 'queue-meta',
+    PUBSUB_HTML: 'pubsub-html',
+
+    PREFIX_PAGE_COUNTER: 'page_count_',
+    PREFIX_HOSTNAME_UPDATED: 'hostname_updated_',
+    PREFIX_PAGE_UPDATED: 'page_updated_',
 }
