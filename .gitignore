@@ -115,5 +115,8 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+# idea
+.idea
+
 # tmp
 src_old
