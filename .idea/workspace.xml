@@ -20,16 +20,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d04128bd-ef64-4b72-830b-1790dcb187c5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/search.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/search.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/dev/push-startpagina.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/dev/push-startpagina.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/AbstractRunner.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/AbstractRunner.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/download-html/index-old.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/download-html/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/download-html/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extract-meta/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/extract-meta/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/extract-urls/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/extract-urls/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/import-meta/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/import-meta/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/AbstractRunner.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/constants/elasticSearch.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/constants/redis.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/models/Site.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/models/SitePage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/utility/Browser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/utility/Database.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/utility/MessageQueue.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/download-html/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/extract-meta/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/extract-urls/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/import-meta/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/web/index.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +57,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
   <component name="ProjectId" id="1jhu08x8enD3uK3JdUFeBlLMVFP" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -63,18 +77,20 @@
     <property name="nodejs_interpreter_path" value="$USER_HOME$/.nvm/versions/node/v14.9.0/bin/node" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="settings.nodejs" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/elasticsearch-config" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/common/constants" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/import-meta" />
       <recent name="$PROJECT_DIR$/src/download-html" />
-      <recent name="$PROJECT_DIR$/src" />
-      <recent name="$PROJECT_DIR$/src/common/models" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/common/Classes" />
+      <recent name="$PROJECT_DIR$/elasticsearch-config" />
     </key>
   </component>
   <component name="RunManager" selected="npm.dev:run">
@@ -153,6 +169,7 @@
       <workItem from="1604268419663" duration="585000" />
       <workItem from="1604269570595" duration="1271000" />
       <workItem from="1604271148285" duration="24917000" />
+      <workItem from="1604355629186" duration="6376000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1604275930732</created>
@@ -215,10 +232,14 @@
     <option name="LAST_COMMIT_MESSAGE" value="Added docker-compose.yml" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="743" y="300" width="424" height="519" key="FileChooserDialogImpl" timestamp="1604270219601">
+    <state x="693" y="339" width="524" height="441" key="#com.intellij.ide.scriptingContext.ui.PerFileMappingsDialogWrapper" timestamp="1604359035981">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="743" y="300" width="424" height="519" key="FileChooserDialogImpl/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604270219601" />
+    <state x="693" y="339" width="524" height="441" key="#com.intellij.ide.scriptingContext.ui.PerFileMappingsDialogWrapper/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604359035981" />
+    <state x="743" y="300" width="424" height="519" key="FileChooserDialogImpl" timestamp="1604359033183">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="743" y="300" width="424" height="519" key="FileChooserDialogImpl/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604359033183" />
     <state width="1878" height="302" key="GridCell.Tab.0.bottom" timestamp="1604300054962">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -235,10 +256,10 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1878" height="302" key="GridCell.Tab.0.right/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604300054962" />
-    <state x="464" y="188" width="992" height="737" key="SettingsEditor" timestamp="1604270269626">
+    <state x="464" y="188" width="992" height="737" key="SettingsEditor" timestamp="1604359049080">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="464" y="188" width="992" height="737" key="SettingsEditor/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604270269626" />
+    <state x="464" y="188" width="992" height="737" key="SettingsEditor/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604359049080" />
     <state x="555" y="276" width="800" height="562" key="Vcs.Push.Dialog.v2" timestamp="1604297378137">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -247,10 +268,10 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="566" y="167" width="778" height="780" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604294727351" />
-    <state x="2711" y="0" width="694" height="588" maximized="true" key="dock-window-1" timestamp="1604279147998">
+    <state x="3235" y="368" width="799" height="1013" key="dock-window-1" timestamp="1604360203378">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2711" y="0" width="694" height="588" maximized="true" key="dock-window-1/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604279147998" />
+    <state x="3235" y="368" width="799" height="1013" key="dock-window-1/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604360203378" />
     <state x="3511" y="397" width="694" height="588" key="dock-window-2" timestamp="1604278682811">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
@@ -259,10 +280,10 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="1969" y="159" width="1599" height="669" maximized="true" key="dock-window-3/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604287764041" />
-    <state x="624" y="252" key="run.anything.popup" timestamp="1604286145732">
+    <state x="624" y="252" key="run.anything.popup" timestamp="1604365153475">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="624" y="252" key="run.anything.popup/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604286145732" />
+    <state x="624" y="252" key="run.anything.popup/0.27.1920.1053/1920.0.1920.1080@0.27.1920.1053" timestamp="1604365153475" />
     <state x="623" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1604273947989">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
