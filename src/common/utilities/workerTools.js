@@ -9,21 +9,35 @@ class WorkerTools {
         });
     }
 
-    async updateWorkerSettings ( worker, options ) {
-        return new Promise(((resolve, reject) => {
-            const name = worker.queuename;
-            const update = {
-                qname: name,
-                ...options,
-            };
-            console.log(`[${name}]`, 'Updating worker settings, update:', update);
-            // Documentation: https://github.com/smrchy/rsmq#setqueueattributesoptions-callback
-            worker.queue.setQueueAttributes(update, (err, resp) => {
-                err
-                    ? reject(err)
-                    : resolve(resp);
+    /**
+     * @param worker
+     * @returns {Promise<boolean>} True means it was created. False means it already exists.
+     */
+    async ensureWorker ( worker ) {
+        return new Promise((resolve, reject) => {
+            const { queue, queuename: qname } = worker;
+            queue.createQueue({ qname }, (err, resp) => {
+                err && err.name !== 'queueExists'
+                    ? reject( err )
+                    : resolve( !!resp );
             });
-        }))
+        });
+    }
+
+    async updateWorkerSettings ( worker, options ) {
+        await this.ensureWorker( worker )
+
+        const { queue, queuename } = worker;
+        const update = {
+            qname: queuename,
+            ...options,
+        };
+        console.log(`[${queuename}]`, 'Updating worker settings, update:', update);
+        // Documentation: https://github.com/smrchy/rsmq#setqueueattributesoptions-callback
+        queue.setQueueAttributes(update, (err, resp) => {
+            if ( err ) throw new Error( err );
+            return resp;
+        });
     }
 
     sendData ( worker, data ) {

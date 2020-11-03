@@ -1,7 +1,7 @@
 const urlTools = require('./urlTools');
 const { UPDATE_DIFFERENCE_MS } = require('../constants/misc');
 const { PREFIX_HOSTNAME_PAGE_COUNTER, PREFIX_PAGE_UPDATED } = require('../constants/redis');
-
+const snappy = require('snappy');
 
 class RedisTools {
 
@@ -49,28 +49,39 @@ class RedisTools {
         return data;
     }
 
-    createKey ( key, value ) {
-        return `${key}__${value}`;
+
+
+    async createKey ( key, value ) {
+        return new Promise((resolve, reject) => {
+            snappy.compress( value, (err, buffer) => {
+                if ( err ) {
+                    reject( err )
+                } else {
+                    const compressedValue = buffer.toString();
+                    resolve( `${key}__${compressedValue}` );
+                }
+            })
+        });
     }
 
     async getHostnamePageCounter ( redis, hostname ) {
-        const key = this.createKey( PREFIX_HOSTNAME_PAGE_COUNTER, hostname );
+        const key = await this.createKey( PREFIX_HOSTNAME_PAGE_COUNTER, hostname );
         return await redis.get( key ) || 0;
     }
 
     async increaseHostnamePageCounter ( redis, hostname ) {
-        const key = this.createKey( PREFIX_HOSTNAME_PAGE_COUNTER, hostname );
+        const key = await this.createKey( PREFIX_HOSTNAME_PAGE_COUNTER, hostname );
         return await redis.incr( key );
     }
 
     async decreaseHostnamePageCounter ( redis, hostname ) {
-        const key = this.createKey( PREFIX_HOSTNAME_PAGE_COUNTER, hostname );
+        const key = await this.createKey( PREFIX_HOSTNAME_PAGE_COUNTER, hostname );
         return await redis.decr( key );
     }
 
     async canQueuePage ( redis, hostname, pathname = '', search = '' ) {
         const url = urlTools.buildPlainUrl( hostname, pathname, search );
-        const key = this.createKey( PREFIX_PAGE_UPDATED, url );
+        const key = await this.createKey( PREFIX_PAGE_UPDATED, url );
         const updateAtString = await redis.get( key );
 
         if ( !updateAtString ) return true; // No previous update found
@@ -82,7 +93,7 @@ class RedisTools {
 
     async pageUpdated ( redis, hostname, pathname = '', search = '' ) {
         const url = urlTools.buildPlainUrl( hostname, pathname, search );
-        const updateKey = this.createKey( PREFIX_PAGE_UPDATED, url );
+        const updateKey = await this.createKey( PREFIX_PAGE_UPDATED, url );
         await redis.set( updateKey, Date.now() );
         await this.increaseHostnamePageCounter( redis, hostname );
     }

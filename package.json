@@ -43,6 +43,7 @@
     "retext-pos": "^3.0.0",
     "rsmq-promise": "^1.0.4",
     "rsmq-worker": "^0.5.2",
+    "snappy": "^6.3.5",
     "vfile": "^4.2.0"
   },
   "devDependencies": {
