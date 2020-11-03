@@ -23,7 +23,7 @@ module.exports = class Dom {
     }
 
     getBody() {
-        return this.getDocument().querySelector('head');
+        return this.getDocument().querySelector('body');
     }
 
     elementGetInnerText( element ) {
@@ -43,7 +43,7 @@ module.exports = class Dom {
 
     elementQueryAll ( element, query ) {
         if ( 'querySelector' in element )
-            return element.querySelector( query );
+            return element.querySelectorAll( query );
     }
 
     queryInnerText ( parentElement, query ) {
@@ -90,7 +90,7 @@ module.exports = class Dom {
         const links = [];
 
         const aTags = this.elementQueryAll( parentElement, 'a' );
-        aTags.forEach(({ href, innerText }) => {
+        aTags && aTags.forEach(({ href, innerText }) => {
             links.push({
                 link: href,
                 label: innerText

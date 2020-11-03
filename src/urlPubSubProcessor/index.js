@@ -10,12 +10,9 @@ class UrlPubSubProcessor extends Runner {
 
     setup () {
         this.redis = new Redis();
-        this.hostnameWorker = workerTools.getWorker( QUEUE_HOSTNAME, {
-            redis: this.redis.getClient()
-        });
-        this.pageWorker = workerTools.getWorker( QUEUE_PAGE, {
-            redis: this.redis.getClient()
-        });
+        const redis = new Redis();
+        this.hostnameWorker = workerTools.getWorker( QUEUE_HOSTNAME, { redis });
+        this.pageWorker = workerTools.getWorker( QUEUE_PAGE, { redis });
     }
 
     run () {

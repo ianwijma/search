@@ -10,9 +10,8 @@ class MetaPubSubProcessor extends Runner {
 
     setup () {
         this.redis = new Redis();
-        this.metaWorker = workerTools.getWorker( QUEUE_META, {
-            redis: this.redis.getClient()
-        });
+        const redis = new Redis();
+        this.metaWorker = workerTools.getWorker( QUEUE_META, { redis });
     }
 
     run () {
@@ -27,7 +26,7 @@ class MetaPubSubProcessor extends Runner {
                pathname = '',
                search = ''
             }) => {
-                const meta = await this.getExtractMeta( html );
+                const meta = await this.getExtractedMeta( html );
                 workerTools.sendData( metaWorker, {
                     meta, hostname, pathname, search
                 });
@@ -35,7 +34,7 @@ class MetaPubSubProcessor extends Runner {
         )
     }
 
-    async getExtractMeta ( html ) {
+    async getExtractedMeta (html ) {
         const dom = new Dom( html );
 
         const meta = {};
@@ -60,6 +59,8 @@ class MetaPubSubProcessor extends Runner {
         meta['links'] = dom.queryLinks( body );
         meta['images'] = dom.queryImages( body );
 
+        console.log(body.innerText);
+        console.log(meta);
         const text = new Text( body.innerText );
         const [
             keyword, keyPhrases, summary

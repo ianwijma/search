@@ -2,7 +2,7 @@ class RedisTools {
 
     publishData ( redisClient, channel, data ) {
         const dataString = this._encodeData( data );
-        console.log(`[${channel}]`, 'Publishing data to subscribers');
+        console.log(`[${channel}]`, 'Publishing data to subscribers, bytes:', dataString.length);
         redisClient.publish( channel, dataString );
     }
 
@@ -16,6 +16,8 @@ class RedisTools {
             promiseCallback( data )
                 .catch(err => console.error('[ERROR]', err));
         });
+
+        redisClient.subscribe(subscribeChannel);
     }
 
     _encodeData ( data ) {

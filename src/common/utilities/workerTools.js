@@ -11,7 +11,7 @@ class WorkerTools {
 
     sendData ( worker, data ) {
         const dataString = this._encodeData( data );
-        console.log(`[${worker.queuename}]`, 'Sending data to worker');
+        console.log(`[${worker.queuename}]`, 'Sending data to worker, bytes:', dataString.length);
         worker.send( dataString );
     }
 
