@@ -7,6 +7,7 @@ module.exports = {
     QUEUE_PROCESSED_SITES: 'queue-processed-sites',
     PUBSUB_HTML: 'pubsub-html',
 
-    PREFIX_HOSTNAME_PAGE_COUNTER: 'prefix_hostname_page_counter',
+    PREFIX_HOSTNAME_PAGE_COUNTER: 'hostname_page_counter',
     PREFIX_PAGE_UPDATED: 'page_updated',
+    PREFIX_PAGE_NANOID: 'page_nanoid',
 }

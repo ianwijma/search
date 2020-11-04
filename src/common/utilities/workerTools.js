@@ -60,12 +60,9 @@ class WorkerTools {
                 .then(() => next())
                 .catch(err => {
                     console.error(`[ERROR-${worker.queuename}]`, err);
+                    next( false );
                 });
         });
-    }
-
-    createKey ( key, value ) {
-        return `${key}::${value}`;
     }
 
     _encodeData ( data ) {
