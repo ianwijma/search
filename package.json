@@ -10,7 +10,10 @@
     "dev:run:metaQueueProcessor": "nodemon src/metaCollectorQueueProcessor/index.js",
     "dev:run:metaPubSubProcessor": "nodemon src/metaExtractQueueProcessor/index.js",
     "dev:run:urlPubSubProcessor": "nodemon src/urlExtractQueueProcessor/index.js",
-    "dev:run:pageQueueProcessor": "nodemon src/pageQueueProcessor/index.js",
+    "dev:run:pageQueueProcessor1": "nodemon src/pageQueueProcessor/index.js",
+    "dev:run:pageQueueProcessor2": "nodemon src/pageQueueProcessor/index.js",
+    "dev:run:pageQueueProcessor3": "nodemon src/pageQueueProcessor/index.js",
+    "dev:run:pageQueueProcessor4": "nodemon src/pageQueueProcessor/index.js",
     "dev:run:hostnameQueueProcessor": "nodemon src/hostnameQueueProcessor/index.js"
   },
   "repository": {

@@ -79,10 +79,13 @@ module.exports = class Text {
                 const data = [];
                 file.data.keyphrases.forEach(function(phrase) {
                     data.push(
-                        phrase.matches[0].nodes.map(toString).join('')
+                        phrase.matches[0].nodes.map(stringify).join('')
                     )
                 });
                 resolve( data )
+            }
+            function stringify(value) {
+                return toString(value)
             }
 
             retext()

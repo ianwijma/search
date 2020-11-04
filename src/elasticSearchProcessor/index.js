@@ -1,5 +1,6 @@
 const Runner = require('../common/classes/runner');
 const Redis = require('../common/classes/redis');
+const database = require('../common/utilities/database');
 const workerTools = require('../common/utilities/workerTools');
 const urlTools = require('../common/utilities/urlTools');
 const { QUEUE_PROCESSED_SITES } = require('../common/constants/redis');
@@ -11,6 +12,7 @@ const { sortBy, each, map, slice } = require('lodash');
 class ElasticSearchProcessor extends Runner {
 
     setup () {
+        database.ensureConnection();
         this.redis = new Redis();
         this.processedSiteWorker = workerTools.getWorker( QUEUE_PROCESSED_SITES, {
             redis: this.redis.getClient()
@@ -45,10 +47,9 @@ class ElasticSearchProcessor extends Runner {
                 content_keyphrase: {},
                 content_summary: {},
             };
-            const cursor = await SiteMetaData.find({ hostname }).cursor();
-            for ( let model = await cursor.next(); model != null; model = await cursor.next() ) {
+            await SiteMetaData.find({ hostname }).cursor().eachAsync(async (model) => {
                 this.mergeSiteData( siteData, model.toJSON() );
-            }
+            });
             const rankedSiteData = this.rankSiteData( siteData );
             await this.pushElasticSearch( hostname, rankedSiteData );
         });
@@ -107,12 +108,14 @@ class ElasticSearchProcessor extends Runner {
 
         // gets the top 100 used value
         each( siteData, (siteValue, siteKey) => {
-            if ( siteKey === 'hostname') return; // skip
-
-            let collection = map( siteValue, (rank, value) => ({rank, value}));
-            collection = sortBy( collection, [ 'rank', 'string' ], ['desc', 'asc'] );
-            collection = slice( collection, 100 );
-            rankedSiteData[ siteKey ] = map( collection, 'string' );
+            if ( siteKey === 'hostname') {
+                rankedSiteData[siteKey] = siteValue
+            } else {
+                let collection = map( siteValue, (rank, value) => ({rank, value}));
+                collection = sortBy( collection, [ 'rank', 'value' ], ['desc', 'asc'] );
+                collection = slice( collection, 0, 100 );
+                rankedSiteData[ siteKey ] = map( collection, 'value' );
+            }
         });
 
         return rankedSiteData;
@@ -122,7 +125,7 @@ class ElasticSearchProcessor extends Runner {
         const { elasticSearch } = this;
         await elasticSearch.index({
             index: SITE_METADATA,
-            _id: hostname,
+            id: hostname,
             body
         });
     }

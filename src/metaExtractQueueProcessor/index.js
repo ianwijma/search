@@ -40,6 +40,8 @@ class MetaPubSubProcessor extends Runner {
 
         const head = dom.getHead();
         const body = dom.getBody();
+        // clean the body from script tags.
+        body.querySelectorAll('script').forEach(el => el.remove());
 
         const keywords = dom.queryAttribute( head, 'meta[name=keywords]', 'content' ) || '';
         meta['keywords'] = keywords.split(',').filter(s => !!s).map(s => s.trim());
