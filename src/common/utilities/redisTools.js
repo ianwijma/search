@@ -1,6 +1,6 @@
 const urlTools = require('./urlTools');
-const { UPDATE_DIFFERENCE_MS } = require('../constants/misc');
-const { PREFIX_HOSTNAME_PAGE_COUNTER, PREFIX_PAGE_UPDATED, PREFIX_PAGE_NANOID } = require('../constants/redis');
+const { UPDATE_DIFFERENCE_MS, HOSTNAME_MAX_TOTAL } = require('../constants/misc');
+const { PREFIX_HOSTNAME_PAGE_COUNTER, PREFIX_PAGE_UPDATED, PREFIX_HOSTNAME_PAGE_TOTAL, PREFIX_PAGE_NANOID } = require('../constants/redis');
 const { nanoid } = require('nanoid/async');
 
 class RedisTools {
@@ -76,8 +76,8 @@ class RedisTools {
     }
 
     async increaseHostnamePageCounter ( redis, hostname ) {
-        const key = await this.createKey( redis, PREFIX_HOSTNAME_PAGE_COUNTER, hostname );
-        return await redis.incr( key );
+        const keyCount = await this.createKey( redis, PREFIX_HOSTNAME_PAGE_COUNTER, hostname );
+        return await redis.incr( keyCount );
     }
 
     async decreaseHostnamePageCounter ( redis, hostname ) {
@@ -85,23 +85,57 @@ class RedisTools {
         return await redis.decr( key );
     }
 
+    async increaseHostnamePageTotal ( redis, hostname ) {
+        const keyTotal = await this.createKey( redis, PREFIX_HOSTNAME_PAGE_TOTAL, hostname );
+        await redis.incr( keyTotal );
+    }
+
+    async resetHostnamePageTotal ( redis, hostname ) {
+        const keyTotal = await this.createKey( redis, PREFIX_HOSTNAME_PAGE_TOTAL, hostname );
+        await redis.set( keyTotal, 0 );
+    }
+
+    async getHostnamePageTotal ( redis, hostname ) {
+        const keyTotal = await this.createKey( redis, PREFIX_HOSTNAME_PAGE_TOTAL, hostname );
+        return await redis.get( keyTotal );
+    }
+
+    async setPageUpdated ( redis, url, date = Date.now() ) {
+        const updateKey = await this.createKey( redis, PREFIX_PAGE_UPDATED, url );
+        return await redis.set( updateKey, date );
+    }
+
+    async getPageUpdated ( redis, url ) {
+        const updateKey = await this.createKey( redis, PREFIX_PAGE_UPDATED, url );
+        return await redis.set( updateKey, Date.now() );
+    }
+
     async canQueuePage ( redis, hostname, pathname = '', search = '' ) {
         const url = urlTools.buildPlainUrl( hostname, pathname, search );
-        const key = await this.createKey( redis, PREFIX_PAGE_UPDATED, url );
-        const updateAtString = await redis.get( key );
+        const [
+            updateAtString,
+            pageTotal
+        ] = await Promise.all([
+            this.getPageUpdated( redis, url ),
+            this.getHostnamePageTotal( redis, hostname ),
+        ]);
+
+        if ( pageTotal >= HOSTNAME_MAX_TOTAL ) return false;
 
         if ( !updateAtString ) return true; // No previous update found
 
-        const updatedAt = new Date(updateAtString);
+        const updatedAt = new Date( updateAtString );
         const now = Date.now();
         return ( now - updatedAt ) > UPDATE_DIFFERENCE_MS;
     }
 
     async pageUpdated ( redis, hostname, pathname = '', search = '' ) {
         const url = urlTools.buildPlainUrl( hostname, pathname, search );
-        const updateKey = await this.createKey( redis, PREFIX_PAGE_UPDATED, url );
-        await redis.set( updateKey, Date.now() );
-        await this.increaseHostnamePageCounter( redis, hostname );
+        await Promise.all([
+            this.setPageUpdated( redis, url ),
+            this.increaseHostnamePageCounter( redis, hostname ),
+            this.increaseHostnamePageTotal( redis, hostname ),
+        ]);
     }
 
 }

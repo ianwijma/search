@@ -64,6 +64,7 @@ class UrlPubSubProcessor extends Runner {
     }
 
     async publishHostnameQueue ({ hostname }) {
+        // TODO: Enable once the limit works
         return; // disabled;
         await workerTools.sendData( this.hostnameWorker, hostname);
     }

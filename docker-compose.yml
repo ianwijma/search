@@ -9,7 +9,7 @@ services:
     image: "redislabs/redisinsight:latest"
     container_name: "redisinsight.search.tmp.dev"
     ports:
-      - "8001:8001"
+      - "9001:8001"
   mongo:
     image: "mongo"
     container_name: "mongo.search.tmp.dev"
@@ -34,4 +34,4 @@ services:
     image: "kibana:7.9.3"
     container_name: "kibana.search.tmp.dev"
     ports:
-      - "5601:5601"
+      - "9002:5601"

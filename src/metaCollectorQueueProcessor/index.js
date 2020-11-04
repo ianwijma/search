@@ -28,6 +28,7 @@ class MetaQueueProcessor extends Runner {
             const count = await redisTools.decreaseHostnamePageCounter(redis, hostname);
             if (count <= 0) {
                 await workerTools.sendData(processedSiteWorker, hostname);
+                await redisTools.resetHostnamePageTotal(redis, hostname)
             }
         });
     }
