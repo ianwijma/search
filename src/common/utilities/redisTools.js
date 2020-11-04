@@ -107,7 +107,7 @@ class RedisTools {
 
     async getPageUpdated ( redis, url ) {
         const updateKey = await this.createKey( redis, PREFIX_PAGE_UPDATED, url );
-        return await redis.set( updateKey, Date.now() );
+        return await redis.get( updateKey );
     }
 
     async canQueuePage ( redis, hostname, pathname = '', search = '' ) {
@@ -120,9 +120,8 @@ class RedisTools {
             this.getHostnamePageTotal( redis, hostname ),
         ]);
 
-        if ( pageTotal >= HOSTNAME_MAX_TOTAL ) return false;
-
-        if ( !updateAtString ) return true; // No previous update found
+        if ( pageTotal && pageTotal >= HOSTNAME_MAX_TOTAL ) return false;
+        if ( isNaN(updateAtString) ) return true;
 
         const updatedAt = new Date( updateAtString );
         const now = Date.now();

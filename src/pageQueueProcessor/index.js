@@ -11,7 +11,8 @@ class PageQueueProcessor extends Runner {
         this.browser = await puppeteer.launch();
         this.redis = new Redis();
         this.pageWorker = workerTools.getWorker( QUEUE_PAGE, {
-            redis: this.redis.getClient()
+            redis: this.redis.getClient(),
+            timeout: 1000 * 60
         });
         this.metaExtractWorker = workerTools.getWorker( QUEUE_META_EXTRACT, {
             redis: this.redis.getClient()
