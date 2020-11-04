@@ -48,6 +48,7 @@ class PageQueueProcessor extends Runner {
         const html = await page.evaluate(() => {
             return document.documentElement.outerHTML;
         });
+
         await page.close();
         return html;
     }

@@ -43,7 +43,7 @@ class WorkerTools {
     sendData ( worker, data ) {
         return new Promise((resolve, reject) => {
             const dataString = this._encodeData( data );
-            console.log(`[${worker.queuename}]`, 'Sending data to worker, bytes:', dataString.length);
+            console.log(`[${worker.queuename}]`, 'Sending data to worker, bytes:', dataString.length, 'data:', data);
             worker.send( dataString, 0, (err, resp) => {
                 err ? reject(err)
                     : resolve(resp);
@@ -54,8 +54,8 @@ class WorkerTools {
     receiveData ( worker, promiseCallback ) {
         console.log(`[${worker.queuename}]`, 'Listening for data');
         worker.on('message', (dataString, next, dataId) => {
-            console.log(`[${worker.queuename}]`, 'Received data for worker');
             const data = this._decodeData( dataString, dataId );
+            console.log(`[${worker.queuename}]`, 'Received data for worker', 'data', data);
             promiseCallback( data )
                 .then(() => next())
                 .catch(err => {
