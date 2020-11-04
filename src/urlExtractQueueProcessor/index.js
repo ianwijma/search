@@ -64,6 +64,7 @@ class UrlPubSubProcessor extends Runner {
     }
 
     async publishHostnameQueue ({ hostname }) {
+        return; // disabled;
         await workerTools.sendData( this.hostnameWorker, hostname);
     }
 

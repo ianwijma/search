@@ -38,12 +38,39 @@ class PageQueueProcessor extends Runner {
     async getHtml ( url ) {
         const contact = await this.browser.createIncognitoBrowserContext();
         const page = await contact.newPage();
-        await page.goto( url, { waitUntil: 'networkidle2' } );
+        const [ contentType ] = await Promise.all([
+            this._pageGetContentType( page, url ),
+            this._pageGoto( page, url ),
+        ]);
+
+        if ( contentType.indexOf('text/html') === -1 ) return ''; // Not a HTML document
+
         const html = await page.evaluate(() => {
             return document.documentElement.outerHTML;
         });
         await page.close();
         return html;
+    }
+
+    async _pageGetContentType (page, wantedUrl ) {
+        const url = new URL( wantedUrl );
+        return new Promise((resolve) => {
+            page.on('response', async (response) => {
+                const responseUrl = new URL( response.url() );
+                if ( url.href === responseUrl.href ) {
+                    const headers = response.headers();
+                    resolve( headers['content-type'] );
+                }
+            });
+        })
+    }
+
+    _pageGoto ( page, url ) {
+        return new Promise(resolve => {
+            page.goto( url, { waitUntil: 'networkidle2' } )
+                .then(resolve)
+                .catch(resolve);
+        })
     }
 
     async publishHTML ( html, hostname, pathname = '', search = '' ) {
