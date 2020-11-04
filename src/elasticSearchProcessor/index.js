@@ -52,6 +52,7 @@ class ElasticSearchProcessor extends Runner {
             });
             const rankedSiteData = this.rankSiteData( siteData );
             await this.pushElasticSearch( hostname, rankedSiteData );
+            await SiteMetaData.deleteMany({ hostname }).exec();
         });
     }
 
@@ -124,7 +125,7 @@ class ElasticSearchProcessor extends Runner {
     async pushElasticSearch ( hostname, body ) {
         const { elasticSearch } = this;
         await elasticSearch.index({
-            index: SITE_METADATA,
+            index: `index-name-${SITE_METADATA}`,
             id: hostname,
             body
         });

@@ -97,10 +97,14 @@ module.exports = class Text {
     }
 
     getSummary ( sentences = 10 ) {
-        return new Promise((resolve, reject) => {
-            const Summarizer = new SummarizerManager(this.content, sentences);
-            const { summary } = Summarizer.getSummaryByFrequency()
-            resolve( summary );
+        return new Promise((resolve) => {
+            try {
+                const Summarizer = new SummarizerManager(this.content, sentences);
+                const { summary } = Summarizer.getSummaryByFrequency()
+                resolve( summary );
+            } catch ( err ) {
+                resolve( '' );
+            }
         })
     }
 
