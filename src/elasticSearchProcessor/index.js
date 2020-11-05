@@ -18,7 +18,7 @@ const {
 class ElasticSearchProcessor extends Runner {
 
     setup () {
-        this.ensureConnection();
+        this.ensureDatabaseConnection();
         this.processedSiteWorker = new Worker( WORKER_PROCESSED_SITES );
         this.elasticSearch = new Client({ node: 'http://localhost:9200' });
     }

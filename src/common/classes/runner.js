@@ -7,7 +7,7 @@ module.exports = class Runner {
         this.run();
     }
 
-    ensureDatabase() {
+    ensureDatabaseConnection() {
         if ( !this.connected ) {
             connect('mongodb://localhost/search-tmp-dev', {
                 useNewUrlParser: true,

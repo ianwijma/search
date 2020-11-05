@@ -12,15 +12,15 @@ const {
 class MetaQueueProcessor extends Runner {
 
     setup() {
-        this.ensureConnection();
+        this.ensureDatabaseConnection();
         this.pageUpdater = new PageUpdater();
         this.metaCollectWorker = new Worker( WORKER_META_COLLECT );
         this.processedSiteWorker = new Worker( WORKER_PROCESSED_SITES );
     }
 
     run() {
-        const {metaWorker, pageUpdater, processedSiteWorker} = this;
-        metaWorker.receiveData(async ({data}) => {
+        const {metaCollectWorker, pageUpdater, processedSiteWorker} = this;
+        metaCollectWorker.receiveData(async ({data}) => {
             const {  hostname, pathname = '',  search = '',  meta = {}, }  = data;
             await SiteMetaData.create({ hostname, pathname, search, meta, });
 

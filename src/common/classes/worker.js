@@ -8,7 +8,26 @@ module.exports = class Worker {
         this._client = new RSMQWorker( queueName, {
             timeout: 1000 * 60,
             rsmq: rsmq.getInstance()
-        })
+        });
+
+        this._client.on('error', (err, id) => this._error('{ERROR}', `(ID=${id})`, err));
+        this._client.on('exceeded', (err, id) => this._warn('{EXCEEDED}', `(ID=${id})`, err));
+        this._client.on('timeout', (err, id) => this._warn('{TIMEOUT}', `(ID=${id})`, err));
+    }
+
+    _error () {
+        const { queuename } = this._client;
+        console.error.apply( console, [ '@ERROR@', `[${queuename}]`, ...arguments ] );
+    }
+
+    _warn () {
+        const { queuename } = this._client;
+        console.warn.apply( console, [ '@WARNING@', `[${queuename}]`, ...arguments ] );
+    }
+
+    _log () {
+        const { queuename } = this._client;
+        console.log.apply( console, [ `[${queuename}]`, ...arguments ] );
     }
 
     async ensureWorker () {
@@ -29,6 +48,7 @@ module.exports = class Worker {
 
         return new Promise((resolve, reject) => {
             const { queue, queuename: qname } = this._client;
+            this._log( 'Updating worker', settings );
             queue.setQueueAttributes({ qname, ...settings }, (err, resp) => {
                 if ( err ) {
                     reject( err );
@@ -42,6 +62,7 @@ module.exports = class Worker {
     sendData ( data ) {
         return new Promise((resolve, reject) => {
             const dataString = this._encodeData( data );
+            this._log( 'Sending data', 'bytes:', dataString.length );
             this._client.send( dataString, 0, (err, resp) => {
                 if ( err ) {
                     reject( err );
@@ -53,7 +74,9 @@ module.exports = class Worker {
     }
 
     receiveData ( promiseCallback ) {
+        this._log( 'Listening for data' );
         this._client.on( 'message', (dataString, next, dataId) => {
+            this._log( 'Data received' );
             const data = this._decodeData( dataString, dataId );
             promiseCallback( data )
                 .then(() => next())

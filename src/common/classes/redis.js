@@ -1,6 +1,8 @@
 const { promisify } = require('util');
 const { list: commandList } = require('redis-commands');
 
+const redis = require('../singletons/redis');
+
 class RedisHashList {
 
     constructor({ redis, hashListName }) {
@@ -41,7 +43,7 @@ module.exports = class Redis {
     }
 
     constructor() {
-        this._client = Redis.getInstance();
+        this._client = redis.getInstance();
         this._setupMethods();
     }
 

@@ -8,6 +8,5 @@ const {
     const worker = new Worker( WORKER_HOSTNAME );
     await worker.sendData({ hostname: 'www.startpagina.nl' });
     console.log('Done!');
-    process.exit();
 })()
 

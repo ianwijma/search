@@ -8,6 +8,5 @@ const {
     const worker = new Worker( WORKER_HOSTNAME );
     await worker.sendData({ hostname: 'ian.wij.ma' });
     console.log('Done!');
-    process.exit();
 })()
 
