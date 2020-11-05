@@ -1,34 +1,26 @@
 const Runner = require('../common/classes/runner');
-const workerTools = require('../common/utilities/workerTools');
 const urlTools = require('../common/utilities/urlTools');
-const Redis = require('../common/classes/redis');
-const { QUEUE_PAGE, QUEUE_META_EXTRACT, QUEUE_URL_EXTRACT } = require('../common/constants/redis');
+const { WORKER_PAGE, WORKER_META_EXTRACT, WORKER_URL_EXTRACT } = require('../common/constants/redis');
 const puppeteer = require('puppeteer');
+
+const Worker = require('../common/classes/worker');
 
 class PageQueueProcessor extends Runner {
 
     async setup () {
         this.browser = await puppeteer.launch();
-        this.redis = new Redis();
-        this.pageWorker = workerTools.getWorker( QUEUE_PAGE, {
-            redis: this.redis.getClient(),
-            timeout: 1000 * 60
-        });
-        this.metaExtractWorker = workerTools.getWorker( QUEUE_META_EXTRACT, {
-            redis: this.redis.getClient()
-        });
-        this.urlExtractWorker = workerTools.getWorker( QUEUE_URL_EXTRACT, {
-            redis: this.redis.getClient()
-        });
 
-        const maxsize = -1;
-        await workerTools.updateWorkerSettings( this.metaExtractWorker, { maxsize })
-        await workerTools.updateWorkerSettings( this.urlExtractWorker, { maxsize })
+        this.pageWorker = new Worker( WORKER_PAGE );
+        this.metaExtractWorker = new Worker( WORKER_META_EXTRACT );
+        this.urlExtractWorker = new Worker( WORKER_URL_EXTRACT );
+
+        await this.metaExtractWorker.updateSettings( { maxsize: -1 } );
+        await this.urlExtractWorker.updateSettings( { maxsize: -1 } );
     }
 
     run () {
         const { pageWorker } = this;
-        workerTools.receiveData( pageWorker, async ({ data }) => {
+        pageWorker.receiveData( async ({ data }) => {
             const { hostname, pathname = '', search = '' } = data;
             const url = urlTools.buildUrl( hostname, pathname, search );
             const html = await this.getHtml( url );
@@ -79,8 +71,8 @@ class PageQueueProcessor extends Runner {
         const { metaExtractWorker, urlExtractWorker } = this;
         const data = { html, hostname, pathname, search };
         await Promise.all([
-            workerTools.sendData( metaExtractWorker, data ),
-            workerTools.sendData( urlExtractWorker, data ),
+            metaExtractWorker.sendData( data ),
+            urlExtractWorker.sendData( data ),
         ]);
     }
 

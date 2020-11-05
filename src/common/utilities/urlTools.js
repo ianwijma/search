@@ -18,13 +18,6 @@ class UrlTools {
         return `https://${plainUrl}`;
     }
 
-    getURL ( hostname, pathname = '', search = '' ) {
-        const url = this.buildUrl( hostname, pathname, search );
-        return new URL( url );
-    }
-
-
-
 }
 
 module.exports = new UrlTools();

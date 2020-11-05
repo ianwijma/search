@@ -1,28 +1,26 @@
 const Runner = require('../common/classes/runner');
-const Redis = require('../common/classes/redis');
 const database = require('../common/utilities/database');
-const workerTools = require('../common/utilities/workerTools');
 const urlTools = require('../common/utilities/urlTools');
-const { QUEUE_PROCESSED_SITES } = require('../common/constants/redis');
+const { WORKER_PROCESSED_SITES } = require('../common/constants/redis');
 const { SITE_METADATA } = require('../common/constants/elasticSearch');
 const SiteMetaData = require('../common/models/siteMetaData');
 const { Client } = require('@elastic/elasticsearch');
 const { sortBy, each, map, slice } = require('lodash');
 
+const Worker = require('../common/classes/worker');
+
 class ElasticSearchProcessor extends Runner {
 
     setup () {
-        database.ensureConnection();
-        this.redis = new Redis();
-        this.processedSiteWorker = workerTools.getWorker( QUEUE_PROCESSED_SITES, {
-            redis: this.redis.getClient()
-        });
+        this.ensureConnection();
+        this.processedSiteWorker = new Worker( WORKER_PROCESSED_SITES );
         this.elasticSearch = new Client({ node: 'http://localhost:9200' });
     }
 
     run () {
         const { processedSiteWorker } = this;
-        workerTools.receiveData( processedSiteWorker, async ({ data: hostname }) => {
+        processedSiteWorker.receiveData(async ({ data }) => {
+            const { hostname } = data;
             const siteData = {
                 hostname,
                 url: {},

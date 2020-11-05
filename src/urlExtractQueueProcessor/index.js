@@ -1,29 +1,28 @@
 const Runner = require('../common/classes/runner');
-const Redis = require('../common/classes/redis');
 const Dom = require('../common/classes/dom');
-const { QUEUE_PAGE, QUEUE_HOSTNAME, QUEUE_URL_EXTRACT } = require('../common/constants/redis');
-const workerTools = require('../common/utilities/workerTools');
-const redisTools = require('../common/utilities/redisTools');
+const Worker = require('../common/classes/worker');
+const PageUpdater = require('../common/classes/pageUpdater');
 const urlTools = require('../common/utilities/urlTools');
+
+const {
+    WORKER_PAGE,
+    WORKER_HOSTNAME,
+    WORKER_URL_EXTRACT
+} = require('../common/constants/redis');
+
 
 class UrlPubSubProcessor extends Runner {
 
     setup () {
-        this.redis = new Redis();
-        this.urlExtractWorker = workerTools.getWorker( QUEUE_URL_EXTRACT, {
-            redis: this.redis.getClient()
-        });
-        this.hostnameWorker = workerTools.getWorker( QUEUE_HOSTNAME, {
-            redis: this.redis.getClient()
-        });
-        this.pageWorker = workerTools.getWorker( QUEUE_PAGE, {
-            redis: this.redis.getClient()
-        });
+        this.pageUpdater = new PageUpdater()
+        this.urlExtractWorker = new Worker( WORKER_URL_EXTRACT );
+        this.hostnameWorker = new Worker( WORKER_HOSTNAME );
+        this.pageWorker = new Worker( WORKER_PAGE );
     }
 
     run () {
         const { urlExtractWorker } = this;
-        workerTools.receiveData(urlExtractWorker, async ({ data }) => {
+        urlExtractWorker.receiveData( async ({ data }) => {
             const {
                 html,
                 hostname
@@ -31,42 +30,55 @@ class UrlPubSubProcessor extends Runner {
             const dom = new Dom( html );
             const body = dom.getBody();
             const links = dom.queryLinks( body );
-            links.forEach(({ link }) => {
-                if ( this.canProcessHref( link ) ) {
-                    if ( link.startsWith('/') ) {
-                        link = urlTools.buildUrl( hostname, link );
-                    }
+            for ( const { link } of links) {
+                if ( !this.canProcessLink( link ) ) continue;
 
-                    if ( link.startsWith('http') ) {
-                        const linkUrl = new URL( link );
-                        const { hostname: linkHostname } = linkUrl;
-                        !!linkHostname && linkHostname === hostname
-                            ? this.publishPageQueue( linkUrl )
-                            : this.publishHostnameQueue( linkUrl );
-                    }
+                const url = this.prepareLink( hostname, link );
+                if ( !this.canProcessUrl( url ) ) continue;
+
+                const urlData = new URL( url );
+                const { hostname: urlHostname } = urlData;
+                if ( urlHostname && urlHostname === hostname ) {
+                    await this.publishPageQueue( urlData );
+                } else {
+                    await this.publishHostnameQueue( urlData )
                 }
-            });
+            }
         });
     }
 
-    canProcessHref ( hrefString ) {
-        return  !!hrefString
-                && hrefString.trim() !== '#'
-                && hrefString.trim() !== '';
+    prepareLink( hostname, link ) {
+        let url = link;
+
+        if ( link.startsWith('/') ) {
+            url = urlTools.buildUrl( hostname, link );
+        }
+
+        return url;
+    }
+
+    canProcessLink ( link ) {
+        return  !!link
+                && link.trim() !== '#'
+                && link.trim() !== '';
+    }
+
+    canProcessUrl ( url ) {
+        return url.startsWith('http');
     }
 
     async publishPageQueue ({ hostname, pathname, search }) {
-        const { pageWorker, redis } = this;
-        if ( await redisTools.canQueuePage( redis, hostname, pathname, search ) ) {
-            await workerTools.sendData( pageWorker, { hostname, pathname, search });
-            await redisTools.pageUpdated( redis, hostname, pathname, search );
+        const { pageWorker, pageUpdater } = this;
+        if ( await pageUpdater.canQueuePage( hostname, pathname, search ) ) {
+            await pageWorker.sendData( { hostname, pathname, search });
+            await pageUpdater.pageUpdated( hostname, pathname, search );
         }
     }
 
     async publishHostnameQueue ({ hostname }) {
         // TODO: Enable once the limit works
         return; // disabled;
-        await workerTools.sendData( this.hostnameWorker, hostname);
+        await this.hostnameWorker.sendData({ hostname });
     }
 
 }

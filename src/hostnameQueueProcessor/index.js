@@ -1,29 +1,28 @@
 const Runner = require('../common/classes/runner');
-const workerTools = require('../common/utilities/workerTools');
-const redisTools = require('../common/utilities/redisTools');
-const Redis = require('../common/classes/redis');
-const { QUEUE_HOSTNAME, QUEUE_PAGE } = require('../common/constants/redis');
+const { WORKER_HOSTNAME, WORKER_PAGE } = require('../common/constants/redis');
+
+const Worker = require('../common/classes/worker');
+const PageUpdater = require('../common/classes/pageUpdater');
 
 class HostnameQueueProcessor extends Runner {
 
     setup () {
-        this.redis = new Redis();
-        this.hostnameWorker = workerTools.getWorker( QUEUE_HOSTNAME, {
-            redis: this.redis.getClient()
-        });
-        this.pageWorker = workerTools.getWorker( QUEUE_PAGE, {
-            redis: this.redis.getClient()
-        });
+        this.pageUpdater = new PageUpdater()
+        this.hostnameWorker = new Worker( WORKER_HOSTNAME );
+        this.pageWorker = new Worker( WORKER_PAGE );
     }
 
     run () {
-        const { hostnameWorker, redis, pageWorker } = this;
-        workerTools.receiveData( hostnameWorker, async ({ data: hostname }) => {
-            if ( await redisTools.canQueuePage( redis, hostname ) ) {
-                await workerTools.sendData( pageWorker, { hostname } );
-                await redisTools.pageUpdated( redis, hostname );
+        const { hostnameWorker, pageUpdater, pageWorker } = this;
+        hostnameWorker.receiveData(async ({ data }) => {
+            const { hostname } = data;
+            if ( await pageUpdater.canQueuePage( hostname ) ) {
+                await Promise.all([
+                    pageUpdater.pageUpdated( hostname ),
+                    pageWorker.sendData( { hostname } ),
+                ]);
             }
-        });
+        })
     }
 
 }

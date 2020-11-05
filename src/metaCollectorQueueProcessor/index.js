@@ -1,34 +1,39 @@
 const Runner = require('../common/classes/runner');
-const Redis = require('../common/classes/redis');
-const workerTools = require('../common/utilities/workerTools');
+const Worker = require('../common/classes/worker');
+const PageUpdater = require('../common/classes/pageUpdater');
+
 const database = require('../common/utilities/database');
-const redisTools = require('../common/utilities/redisTools');
+
 const SiteMetaData = require('../common/models/siteMetaData');
-const {QUEUE_PROCESSED_SITES, QUEUE_META_COLLECT} = require('../common/constants/redis');
+
+const {
+    WORKER_PROCESSED_SITES,
+    WORKER_META_COLLECT
+} = require('../common/constants/redis');
 
 
 class MetaQueueProcessor extends Runner {
 
     setup() {
-        database.ensureConnection();
-        this.redis = new Redis();
-        this.metaWorker = workerTools.getWorker(QUEUE_META_COLLECT, {
-            redis: this.redis.getClient()
-        });
-        this.processedSiteWorker = workerTools.getWorker(QUEUE_PROCESSED_SITES, {
-            redis: this.redis.getClient()
-        });
+        this.ensureConnection();
+        this.pageUpdater = new PageUpdater();
+        this.metaCollectWorker = new Worker( WORKER_META_COLLECT );
+        this.processedSiteWorker = new Worker( WORKER_PROCESSED_SITES );
     }
 
     run() {
-        const {metaWorker, redis, processedSiteWorker} = this;
-        workerTools.receiveData(metaWorker, async ({data}) => {
+        const {metaWorker, pageUpdater, processedSiteWorker} = this;
+        metaWorker.receiveData(async ({data}) => {
             const {  hostname, pathname = '',  search = '',  meta = {}, }  = data;
             await SiteMetaData.create({ hostname, pathname, search, meta, });
-            const count = await redisTools.decreaseHostnamePageCounter(redis, hostname);
+
+            const count = await pageUpdater.decreaseHostnameCounter( hostname );
             if (count <= 0) {
-                await workerTools.sendData(processedSiteWorker, hostname);
-                await redisTools.resetHostnamePageTotal(redis, hostname)
+
+                await Promise.all([
+                    processedSiteWorker.sendData({ hostname }),
+                    pageUpdater.resetHostnameTotal( hostname ),
+                ]);
             }
         });
     }

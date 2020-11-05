@@ -1,25 +1,22 @@
 const Runner = require('../common/classes/runner');
-const Redis = require('../common/classes/redis');
 const Dom = require('../common/classes/dom');
 const Text = require('../common/classes/text');
-const { QUEUE_META_COLLECT, QUEUE_META_EXTRACT } = require('../common/constants/redis');
-const workerTools = require('../common/utilities/workerTools');
+const { WORKER_META_COLLECT, WORKER_META_EXTRACT } = require('../common/constants/redis');
+
+const Worker = require('../common/classes/worker');
 
 class MetaPubSubProcessor extends Runner {
 
-    setup () {
-        const redis = new Redis();
-        this.metaExtractWorker = workerTools.getWorker( QUEUE_META_EXTRACT, {
-            redis: redis.getClient()
-        });
-        this.metaCollectWorker = workerTools.getWorker( QUEUE_META_COLLECT, {
-            redis: redis.getClient()
-        });
+    async setup () {
+        this.metaExtractWorker = new Worker( WORKER_META_EXTRACT );
+        this.metaCollectWorker = new Worker( WORKER_META_COLLECT );
+
+        await this.metaCollectWorker.updateSettings({ maxsize: -1 })
     }
 
     run () {
         const { metaExtractWorker, metaCollectWorker } = this;
-        workerTools.receiveData(metaExtractWorker, async ({ data }) => {
+        metaExtractWorker.receiveData( async ({ data }) => {
             const {
                 html,
                 hostname,
@@ -27,7 +24,7 @@ class MetaPubSubProcessor extends Runner {
                 search = ''
             } = data;
             const meta = await this.getExtractedMeta( html );
-            await workerTools.sendData( metaCollectWorker, {
+            await metaCollectWorker.sendData( {
                 meta, hostname, pathname, search
             });
         });

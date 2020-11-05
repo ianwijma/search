@@ -1,29 +1,56 @@
-const { createClient } = require('redis');
 const { promisify } = require('util');
+const { list: commandList } = require('redis-commands');
+
+class RedisHashList {
+
+    constructor({ redis, hashListName }) {
+        this.redis = redis;
+        this.hashListName = redis.getKey( hashListName );
+    }
+
+    set ( key, value ) {
+        return this.redis.hset( this.hashListName, key, value );
+    }
+
+    get ( key ) {
+        return this.redis.hget( this.hashListName, key );
+    }
+
+    exists ( key ) {
+        return this.redis.hexists( this.hashListName, key );
+    }
+
+    incr ( key ) {
+        return this.redis.hincrby( this.hashListName, key, 1 );
+    }
+
+    decr ( key ) {
+        return this.redis.hincrby( this.hashListName, key, -1 );
+    }
+
+}
 
 module.exports = class Redis {
 
-    _client = createClient()
+    _prefix = 'tds';
 
-    getClient () {
-        return this._client;
-    }
-
-    getMulti () {
-        return this._client.multi();
+    _setupMethods() {
+        commandList.forEach(method => {
+            this[method] = promisify(this._client[method]).bind(this._client);
+        });
     }
 
     constructor() {
-        [
-            'get',
-            'set',
-            'incr',
-            'decr',
-            'publish',
-        ].forEach(method => {
-            const client = this.getClient();
-            this[method] = promisify( client[method] ).bind( client );
-        });
+        this._client = Redis.getInstance();
+        this._setupMethods();
+    }
+
+    getKey ( suffix ) {
+        return `${this._prefix}:${suffix}`;
+    }
+
+    getHashList ( hashListName ) {
+        return new RedisHashList({ redis: this, hashListName })
     }
 
 }
