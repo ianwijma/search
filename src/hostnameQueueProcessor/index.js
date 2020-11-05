@@ -1,8 +1,11 @@
 const Runner = require('../common/classes/runner');
-const { WORKER_HOSTNAME, WORKER_PAGE } = require('../common/constants/redis');
-
 const Worker = require('../common/classes/worker');
 const PageUpdater = require('../common/classes/pageUpdater');
+
+const {
+    WORKER_HOSTNAME,
+    WORKER_PAGE
+} = require('../common/constants/redis');
 
 class HostnameQueueProcessor extends Runner {
 

@@ -1,4 +1,3 @@
-
 module.exports = class AbstractSingleton {
 
     instance = null

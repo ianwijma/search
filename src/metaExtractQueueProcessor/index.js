@@ -1,9 +1,12 @@
 const Runner = require('../common/classes/runner');
+const Worker = require('../common/classes/worker');
 const Dom = require('../common/classes/dom');
 const Text = require('../common/classes/text');
-const { WORKER_META_COLLECT, WORKER_META_EXTRACT } = require('../common/constants/redis');
 
-const Worker = require('../common/classes/worker');
+const {
+    WORKER_META_COLLECT,
+    WORKER_META_EXTRACT
+} = require('../common/constants/redis');
 
 class MetaPubSubProcessor extends Runner {
 

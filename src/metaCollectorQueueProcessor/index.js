@@ -2,15 +2,12 @@ const Runner = require('../common/classes/runner');
 const Worker = require('../common/classes/worker');
 const PageUpdater = require('../common/classes/pageUpdater');
 
-const database = require('../common/utilities/database');
-
 const SiteMetaData = require('../common/models/siteMetaData');
 
 const {
     WORKER_PROCESSED_SITES,
     WORKER_META_COLLECT
 } = require('../common/constants/redis');
-
 
 class MetaQueueProcessor extends Runner {
 

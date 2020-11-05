@@ -1,13 +1,19 @@
-const Runner = require('../common/classes/runner');
-const database = require('../common/utilities/database');
-const urlTools = require('../common/utilities/urlTools');
-const { WORKER_PROCESSED_SITES } = require('../common/constants/redis');
-const { SITE_METADATA } = require('../common/constants/elasticSearch');
-const SiteMetaData = require('../common/models/siteMetaData');
 const { Client } = require('@elastic/elasticsearch');
 const { sortBy, each, map, slice } = require('lodash');
 
+const Runner = require('../common/classes/runner');
 const Worker = require('../common/classes/worker');
+
+const urlTools = require('../common/utilities/urlTools');
+
+const SiteMetaData = require('../common/models/siteMetaData');
+
+const {
+    WORKER_PROCESSED_SITES
+} = require('../common/constants/redis');
+const {
+    SITE_METADATA
+} = require('../common/constants/elasticSearch');
 
 class ElasticSearchProcessor extends Runner {
 

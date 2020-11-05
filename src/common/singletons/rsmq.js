@@ -1,6 +1,7 @@
+const RSMQ = require('rsmq');
+
 const AbstractSingleton = require('./abstractSingleton');
 const redis = require('./redis');
-const RSMQ = require('rsmq');
 
 class Rsmq extends AbstractSingleton {
     _newInstance() {

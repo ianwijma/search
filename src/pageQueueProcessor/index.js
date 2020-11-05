@@ -1,9 +1,15 @@
-const Runner = require('../common/classes/runner');
-const urlTools = require('../common/utilities/urlTools');
-const { WORKER_PAGE, WORKER_META_EXTRACT, WORKER_URL_EXTRACT } = require('../common/constants/redis');
 const puppeteer = require('puppeteer');
 
+const Runner = require('../common/classes/runner');
 const Worker = require('../common/classes/worker');
+
+const urlTools = require('../common/utilities/urlTools');
+
+const {
+    WORKER_PAGE,
+    WORKER_META_EXTRACT,
+    WORKER_URL_EXTRACT
+} = require('../common/constants/redis');
 
 class PageQueueProcessor extends Runner {
 

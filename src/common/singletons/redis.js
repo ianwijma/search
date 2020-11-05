@@ -1,5 +1,6 @@
-const AbstractSingleton = require('./abstractSingleton');
 const { createClient } = require('redis');
+
+const AbstractSingleton = require('./abstractSingleton');
 
 class Redis extends AbstractSingleton {
     _newInstance() {

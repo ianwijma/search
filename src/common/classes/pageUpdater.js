@@ -1,5 +1,7 @@
-import Redis from './redis';
+const Redis = require('./redis');
 const { nanoid } = require('nanoid/async');
+
+const urlTools = require('../utilities/urlTools');
 
 const {
     HASH_LIST_PAGE_HASH,
@@ -7,10 +9,10 @@ const {
     HASH_LIST_HOSTNAME_PAGE_TOTAL,
     HASH_LIST_HOSTNAME_PAGE_COUNTER
 } = require('../constants/redis');
-
-const { HOSTNAME_MAX_TOTAL, UPDATE_DIFFERENCE_MS } = require('../constants/misc');
-
-const urlTools = require('../utilities/urlTools');
+const {
+    HOSTNAME_MAX_TOTAL,
+    UPDATE_DIFFERENCE_MS
+} = require('../constants/misc');
 
 module.exports = class PageUpdater {
 

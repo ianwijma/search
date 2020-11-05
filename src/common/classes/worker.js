@@ -1,4 +1,5 @@
 const RSMQWorker = require('rsmq-worker');
+
 const rsmq = require('../singletons/rsmq');
 
 module.exports = class Worker {

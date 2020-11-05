@@ -2,6 +2,7 @@ const Runner = require('../common/classes/runner');
 const Dom = require('../common/classes/dom');
 const Worker = require('../common/classes/worker');
 const PageUpdater = require('../common/classes/pageUpdater');
+
 const urlTools = require('../common/utilities/urlTools');
 
 const {
@@ -9,7 +10,6 @@ const {
     WORKER_HOSTNAME,
     WORKER_URL_EXTRACT
 } = require('../common/constants/redis');
-
 
 class UrlPubSubProcessor extends Runner {
 
